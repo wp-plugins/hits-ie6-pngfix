@@ -1,7 +1,7 @@
 === HITS- IE6 PNGFix ===
 Contributors: wpgwiggum
 Donate Link:  http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix 
-Tags: IE6, PNG, bug, fix, transparency
+Tags: images, plugin, formatting, image, style
 Requires at least: 2.7
 Tested up to: 2.8
 Stable tag: trunk
@@ -29,6 +29,9 @@ e.g.
 Yes, this is my first plugin. If you have any feedback, please visit my site!
 
 == Changelog ==
+
+= 1.1 =
+* Removed un-necessary files from the plugin directory
 
 = 1.0 =
 * First version
