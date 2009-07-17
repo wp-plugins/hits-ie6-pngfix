@@ -30,6 +30,9 @@ Yes, this is my first plugin. If you have any feedback, please visit my site!
 
 == Changelog ==
 
+= 1.2 =
+* Tweaked the echo of the path for the javascript include file.
+
 = 1.1 =
 * Removed un-necessary files from the plugin directory
 

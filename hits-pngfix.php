@@ -1,7 +1,7 @@
 <?php
 /*
 	Plugin Name: HITS- IE6 PNGFix
-	Version: 1
+	Version: 1.2
 	Author: Adam Erstelle
 	Author URI: http://www.homeitsolutions.ca
 	Plugin URI: http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix
@@ -24,8 +24,11 @@
 
 function hits_pngfix_echo() 
 {
-    $workdir = get_bloginfo('wpurl') . "/" . basename(WP_CONTENT_DIR) . "/plugins/hits-pngfix";
-    echo "<style type='text/css'>img, div { behavior: url($workdir/iepngfix.htc) }</style>";
+    $workdir = get_bloginfo('wpurl') . "/" . basename(WP_CONTENT_DIR) . "/plugins/hits-ie6-pngfix";
+	echo "\n";
+	echo "\n<!-- Begin - HITS-IE6 PNGFix -->";
+    echo "\n<style type='text/css'>img, div { behavior: url(".$workdir."/iepngfix.htc) }</style>";
+	echo "\n<!--  End  - HITS-IE6 PNGFix -->";
 }
 
 add_action('wp_head', 'hits_pngfix_echo');
