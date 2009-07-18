@@ -1,7 +1,7 @@
 === HITS- IE6 PNGFix ===
 Contributors: wpgwiggum
 Donate Link:  http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix 
-Tags: images, plugin, formatting, image, style
+Tags: images, plugin, formatting, image, style, compatability, transparency
 Requires at least: 2.7
 Tested up to: 2.8
 Stable tag: 2.1
