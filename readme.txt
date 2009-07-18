@@ -12,6 +12,8 @@ Adds IE6 Compatability for PNG transparency, courtesy of http://www.twinhelix.co
 
 Upon installation and activation, this plugin will add the necessary code to your pages to take advantage of the TwinHelix approach to getting the IE6 PNG Transparency issue solved.
 
+All donations will go towards micro loans through Kiva at www.kiva.org
+
 == Installation ==
 
 This section describes how to install the plugin and get it working.
