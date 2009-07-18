@@ -31,17 +31,17 @@ Yes, this is my first plugin. If you have any feedback, please visit my site!
 
 == Changelog ==
 
-= 2.0 =
+= 2.0 [July 18, 2009] =
 * Added ability to select from a list of PNG Fix methods
 1. Twin Helix v1.0
 1. Twin Helix v2.0 Alpha
 1. Unit PNG Fix
 
-= 1.2 =
+= 1.2 [July 17, 2009] =
 * Tweaked the echo of the path for the javascript include file.
 
-= 1.1 =
+= 1.1 [July 15, 2009] =
 * Removed un-necessary files from the plugin directory
 
-= 1.0 =
+= 1.0 [July 10, 2009] =
 * First version
