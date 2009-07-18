@@ -5,7 +5,7 @@
 	Author: Adam Erstelle
 	Author URI: http://www.homeitsolutions.ca
 	Plugin URI: http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix
-	Description: Adds IE6 Compatability for PNG transparency, via multiple approaches
+	Description: Adds IE6 Compatability for PNG transparency, using 1 of 3 configured approaches
 	
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -120,6 +120,12 @@ if (!class_exists('hits_ie6_pngfix')) {
 				echo "\n<script type='text/javascript' src='". $this->thispluginurl."THM2/iepngfix_tilebg.js'></script>";
 				echo "\n<script type='text/javascript'>IEPNGFix.blankImg = '". $this->thispluginurl."THM2/blank.gif';</script>";
 			}
+			else if (strcmp($this->options['hits_ie6_pngfix_method','UPNGFIX'])==0)
+			{
+				echo "\n<!--[if lt IE 7]>";
+        		echo "\n<script type='text/javascript' src='". $this->thispluginurl."UPNGFIX/unitpngfix.js'></script>";
+				echo "\n<![endif]-->";
+			}
 			
 			echo "\n";
 			echo "\n<!--  End  - HITS-IE6 PNGFix -->\n";
@@ -134,7 +140,7 @@ if (!class_exists('hits_ie6_pngfix')) {
         function getOptions() {
             //Don't forget to set up the default options
             if (!$theOptions = get_option($this->optionsName)) {
-                $theOptions = array('hits_ie6_pngfix_method'=>'THM2');
+                $theOptions = array('hits_ie6_pngfix_method'=>'THM1');
                 update_option($this->optionsName, $theOptions);
             }
             $this->options = $theOptions;
@@ -195,6 +201,7 @@ if (!class_exists('hits_ie6_pngfix')) {
                             <select name="hits_ie6_pngfix_method" id="hits_ie6_pngfix_method" style="width:200px;">
 								<option value="THM1"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0) { echo ' selected="selected"';} ?>>Twin Helix v1.0</option>
 								<option value="THM2"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0) { echo ' selected="selected"';} ?>>Twin Helix v2.0</option>
+								<option value="UPNGFIX"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'UPNGFIX')==0) { echo ' selected="selected"';} ?>>Unit PNG Fix</option>
 							</select>
                         </td> 
                         </tr>
@@ -202,7 +209,9 @@ if (!class_exists('hits_ie6_pngfix')) {
                         	<td colspan="2">
                             	<p>I take no credit for the great effort authors have gone into making each method of getting IE6 PNG compatability to work. I just did the work to merge them all into a single wordpress plugin.</p>
                             	<p>Feedback and requests are always welcome. Visit the plugin website at <a href="http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix">here</a> to leave your comments.</p>
-                                <p>The Twin Helix approaches were taken from <a href="http://www.twinhelix.com/css/iepngfix/">the twinhelix website</a>.</p></td>
+                                <p>The Twin Helix approaches were taken from <a href="http://www.twinhelix.com/css/iepngfix/">the twinhelix website</a>.</p>
+                                <p>The UnitInteractive approach was taken from <a href="http://labs.unitinteractive.com/unitpngfix.php"> the unit interactive labs website</a>.</p>
+                            </td>
                         </tr>
                         <tr>
                             <th colspan=2><input type="submit" name="hits_ie6_pngfix_save" value="Save" /></th>
