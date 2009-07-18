@@ -4,15 +4,13 @@ Donate Link:  http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-f
 Tags: images, plugin, formatting, image, style
 Requires at least: 2.7
 Tested up to: 2.8
-Stable tag: 2.0
+Stable tag: 2.1
 
 Adds IE6 Compatability for PNG transparency, courtesy of multiple choices for PNG fixes available
 
 == Description ==
 
 Upon installation and activation, this plugin will add the necessary code to your pages to take advantage of the approaches to getting the IE6 PNG Transparency issue solved.
-
-All donations will go towards micro loans through Kiva at www.kiva.org
 
 == Installation ==
 
@@ -30,6 +28,9 @@ This section describes how to install the plugin and get it working.
 Yes, this is my first plugin. If you have any feedback, please visit my site!
 
 == Changelog ==
+
+= 2.1 [July 19, 2009] =
+* Added ability to specify the CSS selector for the twinHelix methods
 
 = 2.0 [July 18, 2009] =
 * Added ability to select from a list of PNG Fix methods
