@@ -224,6 +224,7 @@ if (!class_exists('hits_ie6_pngfix')) {
                 <h2>HITS- IE6 PNG Fix</h2>
                 <form method="post" id="hits_ie6_pngfix_options">
                 <?php wp_nonce_field('hits_ie6_pngfix-update-options'); ?>
+                	<p>This plugin brought to you for free by <a href="http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix">Home I.T. Solutions</a>.
                 	<p>I take no credit for the great effort authors have gone into making each method of getting IE6 PNG compatability to work. I just did the work to merge them all into a single wordpress plugin.</p>
                     <table width="100%" cellspacing="2" cellpadding="5" class="form-table"> 
                         <tr valign="top"> 
@@ -251,6 +252,7 @@ if (!class_exists('hits_ie6_pngfix')) {
                     <h3>PNG Fix Credits</h3>
                     <p>The Twin Helix approaches were taken from <a href="http://www.twinhelix.com/css/iepngfix/">the twinhelix website</a>.</p>
                     <p>The UnitInteractive approach was taken from <a href="http://labs.unitinteractive.com/unitpngfix.php"> the unit interactive labs website</a>.</p>
+                    <p>I wasn't able to find the original author for SuperSleight, and just found the code searching google. If anyone knows the original author, please let me know so that proper credit can be given.</p>
                 </form>
                 <?php
         }
