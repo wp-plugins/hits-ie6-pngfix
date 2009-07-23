@@ -32,6 +32,7 @@ Yes, this is my first plugin. If you have any feedback, please visit my site!
 = 2.2 [July 20, 2009] =
 * Added SuperSleight as another PNG fix method
 * Fixed the TwinHelix methods for servers that don't like the .htc file type
+* Added simple html files to prevent directory access for servers that have it on
 
 = 2.1 [July 19, 2009] =
 * Added ability to specify the CSS selector for the twinHelix methods
