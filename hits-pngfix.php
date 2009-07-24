@@ -122,7 +122,6 @@ if (!class_exists('hits_ie6_pngfix')) {
 			{
 				echo "\n<style type='text/css'>".$this->options['hits_ie6_pngfix_THM_CSSSelector']." { behavior: url(". $this->thispluginurl."THM2/iepngfix.php) }</style>";
 				echo "\n<script type='text/javascript' src='". $this->thispluginurl."THM2/iepngfix_tilebg.js'></script>";
-				echo "\n<script type='text/javascript'>IEPNGFix.blankImg = '". $this->thispluginurl."THM2/blank.gif';</script>";
 			}
 			else if (strcmp($this->options['hits_ie6_pngfix_method'],'UPNGFIX')==0)
 			{
@@ -153,7 +152,8 @@ if (!class_exists('hits_ie6_pngfix')) {
             if (!$theOptions = get_option($this->optionsName)) 
 			{//default options
                 $theOptions = array('hits_ie6_pngfix_method'=>'THM1', //Added V2.0
-									'hits_ie6_pngfix_THM_CSSSelector'=>'img, div' //Added V2.1
+									'hits_ie6_pngfix_THM_CSSSelector'=>'img, div', //Added V2.1
+									'hits_ie6_pngfix_THM_image_path'=>'Initiated'//Added V2.2
 									);
                 update_option($this->optionsName, $theOptions);
             }
@@ -169,6 +169,14 @@ if (!class_exists('hits_ie6_pngfix')) {
 				else if(strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
 					$this->options['hits_ie6_pngfix_THM_CSSSelector'] = 'img, div, a, input';
 			}
+			if(!$this->options['hits_ie6_pngfix_THM_image_path'] || (strcmp($this->options['hits_ie6_pngfix_THM_image_path'],'Initiated')==0))
+			{
+				$missingOptions=true;
+				if(strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0)
+					$this->options['hits_ie6_pngfix_THM_image_path'] = $this->thispluginurl."THM1/blank.gif";
+				else if(strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
+					$this->options['hits_ie6_pngfix_THM_image_path'] = $this->thispluginurl."THM2/blank.gif";
+			}
 			
 			//if missing options found, update them.
 			if($missingOptions==true)
@@ -182,7 +190,20 @@ if (!class_exists('hits_ie6_pngfix')) {
         * Saves the admin options to the database.
         */
         function saveAdminOptions(){
-            return update_option($this->optionsName, $this->options);
+			$this->options['hits_ie6_pngfix_THM_image_path']="";
+			if(strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0)
+				$this->options['hits_ie6_pngfix_THM_image_path'] = $this->thispluginurl."THM1/blank.gif";
+			else if(strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
+				$this->options['hits_ie6_pngfix_THM_image_path'] = $this->thispluginurl."THM2/blank.gif";
+			//save image path to a file so that the php referenced by CSS (outside of wordpress context)
+			//can get the location of the file.
+			$propFile = $this->thispluginpath.'hits-pngfix.properties';
+			$propFileHandle = fopen($propFile, 'w') or die("can't open file");
+			fwrite($propFileHandle,$this->options['hits_ie6_pngfix_THM_image_path']);
+			fclose($propFileHandle);
+
+			//save options to database
+			return update_option($this->optionsName, $this->options);
         }
         
         /**
