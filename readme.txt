@@ -30,30 +30,37 @@ Yes, this is my first plugin. If you have any feedback, please visit my site!
 
 == Changelog ==
 
-= 2.3 [August 2, 2009] =
+= 2.3 =
 * Added basic handling if the properties file is not writeable.
 * Added new code to better handle the upgrading of the plugin.
+* [Updated August 2, 2009]
 
-= 2.2 [July 24, 2009] =
+= 2.2 =
 * Added SuperSleight as another PNG fix method
 * Fixed the TwinHelix methods for servers that don't like the .htc file type
 * The plugin will save the location of the blank.gif absolute URL into a property file for browsers to be able to find it all the time.
 * Added simple html files to prevent directory access for servers that have it on
+* [Updated July 24, 2009]
 
-= 2.1 [July 19, 2009] =
+= 2.1 =
 * Added ability to specify the CSS selector for the twinHelix methods
+* [Updated July 19, 2009]
 
-= 2.0 [July 18, 2009] =
+= 2.0 =
 * Added ability to select from a list of PNG Fix methods
 1. Twin Helix v1.0
 1. Twin Helix v2.0 Alpha
 1. Unit PNG Fix
+* [Updated July 18, 2009]
 
-= 1.2 [July 17, 2009] =
+= 1.2 =
 * Tweaked the echo of the path for the javascript include file.
+* [Updated July 17, 2009]
 
-= 1.1 [July 15, 2009] =
+= 1.1 =
 * Removed un-necessary files from the plugin directory
+* [Updated July 15, 2009]
 
-= 1.0 [July 10, 2009] =
+= 1.0 =
 * First version
+* [Created July 10, 2009]
