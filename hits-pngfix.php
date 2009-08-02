@@ -164,7 +164,7 @@ if (!class_exists('hits_ie6_pngfix')) {
 			//check for missing fields on an upgrade
 			
 			$missingOptions=false;
-			if(!$this->options['hits_ie6_pngfix_version'] || (strcmp($this->options['hits_ie6_pngfix_version',$this->version)==0))
+			if(!$this->options['hits_ie6_pngfix_version'] || (strcmp($this->options['hits_ie6_pngfix_version'],$this->version)==0))
 			{
 				$missingOptions=true;
 				//an upgrade, run upgrade specific tasks.
@@ -212,7 +212,7 @@ if (!class_exists('hits_ie6_pngfix')) {
 			//save image path to a file so that the php referenced by CSS (outside of wordpress context)
 			//can get the location of the file.
 			$propFile = $this->thispluginpath.'hits-pngfix.properties';
-			if(is__writable($propFile))
+			if($this->is__writable($propFile))
 			{
 				$propFileHandle = @fopen($propFile, 'w') or die("can't open file");
 				fwrite($propFileHandle,$this->options['hits_ie6_pngfix_THM_image_path']);
@@ -309,11 +309,14 @@ if (!class_exists('hits_ie6_pngfix')) {
                         </tr>
                     </table>
                     
-                    <p>Feedback and requests are always welcome. Visit the plugin website <a href="http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix">here</a> to leave any feedback, comments or donations. All donations will go towards micro loans through Kiva at www.kiva.org</p>
+                    <p>Feedback and requests are always welcome. Visit the plugin website 
+                    <a href="http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix">here</a> 
+                    to leave any feedback, comments or donations. All donations will go towards micro loans through Kiva at www.kiva.org</p>
                     <h3>PNG Fix Credits</h3>
                     <p>The Twin Helix approaches were taken from <a href="http://www.twinhelix.com/css/iepngfix/">the twinhelix website</a>.</p>
                     <p>The UnitInteractive approach was taken from <a href="http://labs.unitinteractive.com/unitpngfix.php"> the unit interactive labs website</a>.</p>
-                    <p>I wasn't able to find the original author for SuperSleight, and just found the code searching google. If anyone knows the original author, please let me know so that proper credit can be given.</p>
+                    <p>I wasn't able to find the original author for SuperSleight, and just found the code searching google. 
+                       If anyone knows the original author, please let me know so that proper credit can be given.</p>
                 </form>
                 <?php
         }
