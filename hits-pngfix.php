@@ -1,11 +1,11 @@
 <?php
 /*
 	Plugin Name: HITS- IE6 PNGFix
-	Version: 2.2
+	Version: 2.3
 	Author: Adam Erstelle
 	Author URI: http://www.homeitsolutions.ca
 	Plugin URI: http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix
-	Description: Adds IE6 Compatability for PNG transparency, using 1 of 3 configured approaches
+	Description: Adds IE6 Compatability for PNG transparency, using 1 of 4 configured approaches
 	
 	PLEASE NOTE: If you make any modifications to this plugin file directly, please contact me so that
 	             the plugin can be updated for others to enjoy the same freedom and functionality you
@@ -29,7 +29,7 @@
 /**
 * Guess the wp-content and plugin urls/paths
 */
-// Pre-2.6 compatibility
+// Pre-WP-2.6 compatibility
 if ( ! defined( 'WP_CONTENT_URL' ) )
       define( 'WP_CONTENT_URL', get_option( 'siteurl' ) . '/wp-content' );
 if ( ! defined( 'WP_CONTENT_DIR' ) )
@@ -46,6 +46,7 @@ if (!class_exists('hits_ie6_pngfix')) {
         * @var string The options string name for this plugin
         */
         var $optionsName = 'hits_ie6_pngfix_options';
+		var $version = '2.3';
         
         /**
         * @var string $localizationDomain Domain used for localization
@@ -153,29 +154,42 @@ if (!class_exists('hits_ie6_pngfix')) {
 			{//default options
                 $theOptions = array('hits_ie6_pngfix_method'=>'THM1', //Added V2.0
 									'hits_ie6_pngfix_THM_CSSSelector'=>'img, div', //Added V2.1
-									'hits_ie6_pngfix_THM_image_path'=>'Initiated'//Added V2.2
+									'hits_ie6_pngfix_THM_image_path'=>'Initiated',//Added V2.2
+									'hits_ie6_pngfix_version'=>$this->version //Added V2.3
 									);
                 update_option($this->optionsName, $theOptions);
             }
             $this->options = $theOptions;
             
 			//check for missing fields on an upgrade
+			
 			$missingOptions=false;
-			if(!$this->options['hits_ie6_pngfix_THM_CSSSelector'])
+			if(!$this->options['hits_ie6_pngfix_version'] || (strcmp($this->options['hits_ie6_pngfix_version',$this->version)==0))
 			{
 				$missingOptions=true;
-				if(strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0)
-					$this->options['hits_ie6_pngfix_THM_CSSSelector'] = 'img,div';
-				else if(strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
-					$this->options['hits_ie6_pngfix_THM_CSSSelector'] = 'img, div, a, input';
-			}
-			if(!$this->options['hits_ie6_pngfix_THM_image_path'] || (strcmp($this->options['hits_ie6_pngfix_THM_image_path'],'Initiated')==0))
-			{
-				$missingOptions=true;
-				if(strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0)
-					$this->options['hits_ie6_pngfix_THM_image_path'] = $this->thispluginurl."THM1/blank.gif";
-				else if(strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
-					$this->options['hits_ie6_pngfix_THM_image_path'] = $this->thispluginurl."THM2/blank.gif";
+				//an upgrade, run upgrade specific tasks.
+				
+				//upgrading from pre-version 2.2
+				if(!$this->options['hits_ie6_pngfix_THM_CSSSelector'])
+				{
+					if(strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0)
+						$this->options['hits_ie6_pngfix_THM_CSSSelector'] = 'img,div';
+					else if(strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
+						$this->options['hits_ie6_pngfix_THM_CSSSelector'] = 'img, div, a, input';
+				}
+				if(!$this->options['hits_ie6_pngfix_THM_image_path'] || (strcmp($this->options['hits_ie6_pngfix_THM_image_path'],'Initiated')==0))
+				{
+					if(strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0)
+						$this->options['hits_ie6_pngfix_THM_image_path'] = $this->thispluginurl."THM1/blank.gif";
+					else if(strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
+						$this->options['hits_ie6_pngfix_THM_image_path'] = $this->thispluginurl."THM2/blank.gif";
+				}
+				
+				//upgrading from version 2.2
+				if(strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0 || strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
+				{
+					//try to save the value of the old property file
+				}
 			}
 			
 			//if missing options found, update them.
@@ -198,13 +212,39 @@ if (!class_exists('hits_ie6_pngfix')) {
 			//save image path to a file so that the php referenced by CSS (outside of wordpress context)
 			//can get the location of the file.
 			$propFile = $this->thispluginpath.'hits-pngfix.properties';
-			$propFileHandle = fopen($propFile, 'w') or die("can't open file");
-			fwrite($propFileHandle,$this->options['hits_ie6_pngfix_THM_image_path']);
-			fclose($propFileHandle);
+			if(is__writable($propFile))
+			{
+				$propFileHandle = @fopen($propFile, 'w') or die("can't open file");
+				fwrite($propFileHandle,$this->options['hits_ie6_pngfix_THM_image_path']);
+				fclose($propFileHandle);
+			}
 
 			//save options to database
 			return update_option($this->optionsName, $this->options);
         }
+		
+		//following code taken from http://us.php.net/manual/en/function.is-writable.php
+		function is__writable($path) {
+		//will work in despite of Windows ACLs bug
+		//NOTE: use a trailing slash for folders!!!
+		//see http://bugs.php.net/bug.php?id=27609
+		//see http://bugs.php.net/bug.php?id=30931
+		
+			if ($path{strlen($path)-1}=='/') // recursively return a temporary file path
+				return is__writable($path.uniqid(mt_rand()).'.tmp');
+			else if (is_dir($path))
+				return is__writable($path.'/'.uniqid(mt_rand()).'.tmp');
+			// check tmp file for read/write capabilities
+			$rm = file_exists($path);
+			$f = @fopen($path, 'a');
+			if ($f===false)
+				return false;
+			fclose($f);
+			if (!$rm)
+				unlink($path);
+			return true;
+		}
+
         
         /**
         * @desc Adds the options subpanel

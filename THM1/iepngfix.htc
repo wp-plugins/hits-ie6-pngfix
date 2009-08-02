@@ -12,7 +12,7 @@
 
 // This must be a path to a blank image, relative to the HTML document(s).
 // In production use I suggest '/images/blank.gif' or similar. That's all!
-if (typeof blankImg == 'undefined') var blankImg = '<?php $myFile = "../hits-pngfix.properties";$fh = fopen($myFile, 'r');$theData = fread($fh, filesize($myFile));fclose($fh);echo $theData; ?>';
+if (typeof blankImg == 'undefined') var blankImg = '<?php echo $theData; ?>';
 
 
 

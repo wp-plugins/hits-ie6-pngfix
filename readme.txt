@@ -17,6 +17,7 @@ Upon installation and activation, this plugin will add the necessary code to you
 This section describes how to install the plugin and get it working.
 
 1. Upload folder `hits-ie6-pngfix` to the `/wp-content/plugins/` directory
+1. Set the `/hits-ie6-pngfix/hits-pngfix.properties` file to be writeable by the web server.
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Optionally select the PNG Fix method you wish to use
 1. Test and enjoy!
@@ -28,6 +29,10 @@ This section describes how to install the plugin and get it working.
 Yes, this is my first plugin. If you have any feedback, please visit my site!
 
 == Changelog ==
+
+= 2.3 [August 2, 2009] =
+* Added basic handling if the properties file is not writeable.
+* Added new code to better handle the upgrading of the plugin.
 
 = 2.2 [July 24, 2009] =
 * Added SuperSleight as another PNG fix method
