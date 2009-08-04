@@ -1,7 +1,7 @@
 <?php
 /*
 	Plugin Name: HITS- IE6 PNGFix
-	Version: 2.3
+	Version: 2.4
 	Author: Adam Erstelle
 	Author URI: http://www.homeitsolutions.ca
 	Plugin URI: http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix
@@ -51,7 +51,7 @@ if (!class_exists('hits_ie6_pngfix')) {
         /**
         * @var string $localizationDomain Domain used for localization
         */
-        var $localizationDomain = "hits_ie6_pngfix";
+        var $localizationDomain = "hits-ie6-pngfix";
         
         /**
         * @var string $pluginurl The path to this plugin
@@ -278,45 +278,44 @@ if (!class_exists('hits_ie6_pngfix')) {
 				$this->options['hits_ie6_pngfix_THM_CSSSelector'] = $_POST['hits_ie6_pngfix_THM_CSSSelector'];
                 $this->saveAdminOptions();
                 
-                echo '<div class="updated"><p>Success! Your changes were sucessfully saved!</p></div>';
+                echo '<div class="updated"><p>'. __('Success! Your changes were sucessfully saved!') .'</p></div>';
             }
 ?>                                   
                 <div class="wrap">
                 <h2>HITS- IE6 PNG Fix</h2>
                 <form method="post" id="hits_ie6_pngfix_options">
-                <?php wp_nonce_field('hits_ie6_pngfix-update-options'); ?>
-                	<p>This plugin brought to you for free by <a href="http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix">Home I.T. Solutions</a>.
-                	<p>I take no credit for the great effort authors have gone into making each method of getting IE6 PNG compatability to work. I just did the work to merge them all into a single wordpress plugin.</p>
+                <?php wp_nonce_field('hits_ie6_pngfix-update-options'); 
+				_e('<p>This plugin brought to you for free by <a href="http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix">Home I.T. Solutions</a>.</p>');
+                _e('<p>I take no credit for the great effort authors have gone into making each method of getting IE6 PNG compatability to work. I just did the work to merge them all into a single wordpress plugin.</p>');
+					?>
                     <table width="100%" cellspacing="2" cellpadding="5" class="form-table"> 
                         <tr valign="top"> 
                             <th width="33%" scope="row"><?php _e('PNG Fix Method:', $this->localizationDomain); ?></th> 
                             <td>
                             <select name="hits_ie6_pngfix_method" id="hits_ie6_pngfix_method" style="width:200px;">
-								<option value="THM1"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0) { echo ' selected="selected"';} ?>>Twin Helix v1.0</option>
-								<option value="THM2"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0) { echo ' selected="selected"';} ?>>Twin Helix v2.0</option>
-								<option value="UPNGFIX"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'UPNGFIX')==0) { echo ' selected="selected"';} ?>>Unit PNG Fix</option>
-								<option value="SUPERSLEIGHT"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'SUPERSLEIGHT')==0) { echo ' selected="selected"';} ?>>SuperSleight</option>
+								<option value="THM1"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0) { echo ' selected="selected"';} ?>><?php _e('Twin Helix v1.0');?></option>
+								<option value="THM2"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0) { echo ' selected="selected"';} ?>>><?php _e('Twin Helix v2.00');?></option>
+								<option value="UPNGFIX"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'UPNGFIX')==0) { echo ' selected="selected"';} ?>>><?php _e('Unit PNG Fix0');?></option>
+								<option value="SUPERSLEIGHT"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'SUPERSLEIGHT')==0) { echo ' selected="selected"';} ?>><?php _e('SuperSleight');?></option>
                                 
 							</select>
                         </td> 
                         </tr>
                         <tr>
                         	<th width="33%" scope="row"><?php _e('CSS Selector:', $this->localizationDomain); ?></th>
-                            <td><input type="text" name="hits_ie6_pngfix_THM_CSSSelector" value="<?php echo $this->options['hits_ie6_pngfix_THM_CSSSelector'] ?>" size="100" /><br />Note: CSS Selector is only used for the Twin Helix methods.</td>
+                            <td><input type="text" name="hits_ie6_pngfix_THM_CSSSelector" value="<?php echo $this->options['hits_ie6_pngfix_THM_CSSSelector'] ?>" size="100" /><br /><?php _e('Note: CSS Selector is only used for the Twin Helix methods.');?></td>
 						</tr>
                         <tr>
                             <th colspan=2><input type="submit" name="hits_ie6_pngfix_save" value="Save" /></th>
                         </tr>
                     </table>
                     
-                    <p>Feedback and requests are always welcome. Visit the plugin website 
-                    <a href="http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix">here</a> 
-                    to leave any feedback, comments or donations. All donations will go towards micro loans through Kiva at www.kiva.org</p>
-                    <h3>PNG Fix Credits</h3>
-                    <p>The Twin Helix approaches were taken from <a href="http://www.twinhelix.com/css/iepngfix/">the twinhelix website</a>.</p>
-                    <p>The UnitInteractive approach was taken from <a href="http://labs.unitinteractive.com/unitpngfix.php"> the unit interactive labs website</a>.</p>
-                    <p>I wasn't able to find the original author for SuperSleight, and just found the code searching google. 
-                       If anyone knows the original author, please let me know so that proper credit can be given.</p>
+                    <p><?php _e('Feedback and requests are always welcome. Visit the plugin website <a href="http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix">here</a> to leave any feedback, comments or donations. All donations will go towards micro loans through Kiva at www.kiva.org');?></p>
+                    <h3><?php _e('PNG Fix Credits');?></h3>
+                    <p><?php _e('The Twin Helix approaches were taken from <a href="http://www.twinhelix.com/css/iepngfix/">the twinhelix website</a>.');?></p>
+                    <p><?php _e('The UnitInteractive approach was taken from <a href="http://labs.unitinteractive.com/unitpngfix.php"> the unit interactive labs website</a>.');?></p>
+                    <p><?php _e('I was not able to find the original author for SuperSleight, and just found the code searching google. 
+                       If anyone knows the original author, please let me know so that proper credit can be given.');?></p>
                 </form>
                 <?php
         }
