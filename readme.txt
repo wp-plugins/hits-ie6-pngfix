@@ -16,10 +16,10 @@ Upon installation and activation, this plugin will add the necessary code to you
 
 This section describes how to install the plugin and get it working.
 
-1. Upload folder `hits-ie6-pngfix` to the `/wp-content/plugins/` directory
+1. Upload folder `hits-ie6-pngfix` to the `/wp-content/plugins/` directory.
 1. Set the `/hits-ie6-pngfix/` folder to be writeable by the web server.
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Optionally select the PNG Fix method you wish to use
+1. Activate the plugin through the 'Plugins' menu in WordPress.
+1. Optionally select the PNG Fix method you wish to use.
 1. Test and enjoy!
 
 == Frequently Asked Questions ==
@@ -28,7 +28,17 @@ This section describes how to install the plugin and get it working.
 
 Yes, this is my first plugin. If you have any feedback, please visit my site!
 
+== Screenshots ==
+
+1. This is the settings page. Pretty simple.
+2. These are the various options you can select. After clicking save you are done!
+
 == Changelog ==
+
+= 2.4 =
+* Added support for internationalization.
+* Added screen shots for WordPress plugin page.
+* [Updated August 3, 2009]
 
 = 2.3 =
 * Added basic handling if the properties file is not writeable.
