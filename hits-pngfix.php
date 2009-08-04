@@ -294,8 +294,8 @@ if (!class_exists('hits_ie6_pngfix')) {
                             <td>
                             <select name="hits_ie6_pngfix_method" id="hits_ie6_pngfix_method" style="width:200px;">
 								<option value="THM1"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0) { echo ' selected="selected"';} ?>><?php _e('Twin Helix v1.0');?></option>
-								<option value="THM2"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0) { echo ' selected="selected"';} ?>>><?php _e('Twin Helix v2.0');?></option>
-								<option value="UPNGFIX"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'UPNGFIX')==0) { echo ' selected="selected"';} ?>>><?php _e('Unit PNG Fix');?></option>
+								<option value="THM2"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0) { echo ' selected="selected"';} ?>><?php _e('Twin Helix v2.0');?></option>
+								<option value="UPNGFIX"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'UPNGFIX')==0) { echo ' selected="selected"';} ?>><?php _e('Unit PNG Fix');?></option>
 								<option value="SUPERSLEIGHT"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'SUPERSLEIGHT')==0) { echo ' selected="selected"';} ?>><?php _e('SuperSleight');?></option>
                                 
 							</select>
