@@ -38,6 +38,7 @@ Yes, this is my first plugin. If you have any feedback, please visit my site!
 = 2.4 =
 * Added support for internationalization.
 * Added screen shots for WordPress plugin page.
+* Added HTML conditional statement to help in validation.
 * [Updated August 3, 2009]
 
 = 2.3 =

@@ -113,7 +113,7 @@ if (!class_exists('hits_ie6_pngfix')) {
 		{
 			echo "\n";
 			echo "\n<!-- Begin - HITS-IE6 PNGFix -->";
-			echo "\n";
+			echo "\n<!--[if lte IE 6]>\n";
 			
 			if (strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0)
 			{
@@ -138,7 +138,7 @@ if (!class_exists('hits_ie6_pngfix')) {
 				echo "\n<![endif]-->";
 			}
 			
-			echo "\n";
+			echo "\n<![endif]-->\n";
 			echo "\n<!--  End  - HITS-IE6 PNGFix -->\n";
 			echo "\n";
 		}
