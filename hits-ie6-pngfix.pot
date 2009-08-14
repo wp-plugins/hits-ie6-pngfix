@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/hits-ie6-pngfix\n"
+"POT-Creation-Date: 2009-08-04 03:38+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: hits-pngfix.php:265
+msgid "Settings"
+msgstr ""
+
+#: hits-pngfix.php:276
+msgid ""
+"Whoops! There was a problem with the data you posted. Please go back and try "
+"again."
+msgstr ""
+
+#: hits-pngfix.php:281
+msgid "Success! Your changes were sucessfully saved!"
+msgstr ""
+
+#: hits-pngfix.php:288
+msgid ""
+"<p>This plugin brought to you for free by <a href=\"http://www."
+"homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix\">Home I.T. "
+"Solutions</a>.</p>"
+msgstr ""
+
+#: hits-pngfix.php:289
+msgid ""
+"<p>I take no credit for the great effort authors have gone into making each "
+"method of getting IE6 PNG compatability to work. I just did the work to "
+"merge them all into a single wordpress plugin.</p>"
+msgstr ""
+
+#: hits-pngfix.php:293
+msgid "PNG Fix Method:"
+msgstr ""
+
+#: hits-pngfix.php:296
+msgid "Twin Helix v1.0"
+msgstr ""
+
+#: hits-pngfix.php:297
+msgid "Twin Helix v2.0"
+msgstr ""
+
+#: hits-pngfix.php:298
+msgid "Unit PNG Fix"
+msgstr ""
+
+#: hits-pngfix.php:299
+msgid "SuperSleight"
+msgstr ""
+
+#: hits-pngfix.php:305
+msgid "CSS Selector:"
+msgstr ""
+
+#: hits-pngfix.php:306
+msgid "Note: CSS Selector is only used for the Twin Helix methods."
+msgstr ""
+
+#: hits-pngfix.php:313
+msgid "Feedback and requests are always welcome."
+msgstr ""
+
+#: hits-pngfix.php:313
+msgid "Visit the plugin website"
+msgstr ""
+
+#: hits-pngfix.php:313
+msgid ""
+"to leave any feedback, translations, comments or donations. All donations "
+"will go towards micro loans through"
+msgstr ""
+
+#: hits-pngfix.php:314
+msgid "PNG Fix Credits"
+msgstr ""
+
+#: hits-pngfix.php:315
+msgid "The Twin Helix approaches were taken from"
+msgstr ""
+
+#: hits-pngfix.php:316
+msgid "The UnitInteractive approach was taken from"
+msgstr ""
+
+#: hits-pngfix.php:317
+msgid ""
+"I was not able to find the original author for SuperSleight, and just found "
+"the code searching google. If anyone knows the original author, please let "
+"me know so that proper credit can be given."
+msgstr ""
