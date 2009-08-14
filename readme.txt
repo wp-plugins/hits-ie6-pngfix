@@ -39,7 +39,7 @@ Yes, this is my first plugin. If you have any feedback, please visit my site!
 * Added support for internationalization.
 * Added screen shots for WordPress plugin page.
 * Added HTML conditional statement to help in validation.
-* [Updated August 3, 2009]
+* [Updated August 14, 2009]
 
 = 2.3 =
 * Added basic handling if the properties file is not writeable.
