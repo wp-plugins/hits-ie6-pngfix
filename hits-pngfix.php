@@ -188,7 +188,7 @@ if (!class_exists('hits_ie6_pngfix')) {
 				//upgrading from version 2.2
 				if(strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0 || strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
 				{
-					//try to save the value of the old property file
+					//there is nothing to upgrade.
 				}
 			}
 			
