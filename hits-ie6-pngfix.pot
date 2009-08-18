@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/hits-ie6-pngfix\n"
-"POT-Creation-Date: 2009-08-04 03:38+0000\n"
+"POT-Creation-Date: 2009-08-18 21:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,91 +15,96 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: hits-pngfix.php:265
+#: hits-pngfix.php:263
 msgid "Settings"
 msgstr ""
 
-#: hits-pngfix.php:276
+#: hits-pngfix.php:274
 msgid ""
 "Whoops! There was a problem with the data you posted. Please go back and try "
 "again."
 msgstr ""
 
-#: hits-pngfix.php:281
+#: hits-pngfix.php:279
 msgid "Success! Your changes were sucessfully saved!"
 msgstr ""
 
-#: hits-pngfix.php:288
-msgid ""
-"<p>This plugin brought to you for free by <a href=\"http://www."
-"homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix\">Home I.T. "
-"Solutions</a>.</p>"
+#: hits-pngfix.php:286
+msgid "This plugin brought to you for free by"
 msgstr ""
 
-#: hits-pngfix.php:289
+#: hits-pngfix.php:287
 msgid ""
-"<p>I take no credit for the great effort authors have gone into making each "
+"I take no credit for the great effort authors have gone into making each "
 "method of getting IE6 PNG compatability to work. I just did the work to "
-"merge them all into a single wordpress plugin.</p>"
+"merge them all into a single wordpress plugin."
 msgstr ""
 
-#: hits-pngfix.php:293
+#: hits-pngfix.php:290
 msgid "PNG Fix Method:"
 msgstr ""
 
-#: hits-pngfix.php:296
+#: hits-pngfix.php:293
 msgid "Twin Helix v1.0"
 msgstr ""
 
-#: hits-pngfix.php:297
+#: hits-pngfix.php:294
 msgid "Twin Helix v2.0"
 msgstr ""
 
-#: hits-pngfix.php:298
+#: hits-pngfix.php:295
 msgid "Unit PNG Fix"
 msgstr ""
 
-#: hits-pngfix.php:299
+#: hits-pngfix.php:296
 msgid "SuperSleight"
 msgstr ""
 
-#: hits-pngfix.php:305
+#: hits-pngfix.php:297
+msgid "DD_belatedPNG"
+msgstr ""
+
+#: hits-pngfix.php:303
 msgid "CSS Selector:"
 msgstr ""
 
-#: hits-pngfix.php:306
-msgid "Note: CSS Selector is only used for the Twin Helix methods."
+#: hits-pngfix.php:304
+msgid "Note: CSS Selector is not used for Unit PNG Fix and SuperSleight."
 msgstr ""
 
-#: hits-pngfix.php:313
+#: hits-pngfix.php:311
 msgid "Feedback and requests are always welcome."
 msgstr ""
 
-#: hits-pngfix.php:313
+#: hits-pngfix.php:311
 msgid "Visit the plugin website"
 msgstr ""
 
-#: hits-pngfix.php:313
+#: hits-pngfix.php:311
 msgid ""
 "to leave any feedback, translations, comments or donations. All donations "
 "will go towards micro loans through"
 msgstr ""
 
-#: hits-pngfix.php:314
+#: hits-pngfix.php:312
 msgid "PNG Fix Credits"
 msgstr ""
 
-#: hits-pngfix.php:315
+#: hits-pngfix.php:313
 msgid "The Twin Helix approaches were taken from"
 msgstr ""
 
-#: hits-pngfix.php:316
+#: hits-pngfix.php:314
 msgid "The UnitInteractive approach was taken from"
 msgstr ""
 
-#: hits-pngfix.php:317
+#: hits-pngfix.php:315
 msgid ""
 "I was not able to find the original author for SuperSleight, and just found "
 "the code searching google. If anyone knows the original author, please let "
 "me know so that proper credit can be given."
+msgstr ""
+
+#: hits-pngfix.php:316
+msgid "The DD_belatedPNG approach was taken from"
 msgstr ""
