@@ -35,6 +35,10 @@ Yes, this is my first plugin. If you have any feedback, please visit my site!
 
 == Changelog ==
 
+= 2.5 =
+* Fixed UnitPNG and SuperSleight so that there wasn't 2 version checks resulting in there being bad output at the top of page
+* Added DD_belatedPNG as another PNG fix method
+
 = 2.4 =
 * Added support for internationalization.
 * Added screen shots for WordPress plugin page.

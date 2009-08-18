@@ -1,11 +1,11 @@
 <?php
 /*
 	Plugin Name: HITS- IE6 PNGFix
-	Version: 2.4
+	Version: 2.5
 	Author: Adam Erstelle
 	Author URI: http://www.homeitsolutions.ca
 	Plugin URI: http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix
-	Description: Adds IE6 Compatability for PNG transparency, using 1 of 4 configured approaches
+	Description: Adds IE6 Compatability for PNG transparency, using 1 of 5 configured approaches
 	
 	PLEASE NOTE: If you make any modifications to this plugin file directly, please contact me so that
 	             the plugin can be updated for others to enjoy the same freedom and functionality you
@@ -115,7 +115,12 @@ if (!class_exists('hits_ie6_pngfix')) {
 			echo "\n<!-- Begin - HITS-IE6 PNGFix -->";
 			echo "\n<!--[if lte IE 6]>\n";
 			
-			if (strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0)
+			if (strcmp($this->options['hits_ie6_pngfix_method'],'DD_BELATED')==0)
+			{
+				echo "\n<script type='text/javascript' src='". $this->thispluginurl."DD_belatedPNG/DD_belatedPNG_0.0.8a-min.js'></script>";
+				echo "\n<script type='text/javascript'>DD_belatedPNG.fix('".$this->options['hits_ie6_pngfix_THM_CSSSelector']."');</script>";
+			}
+			else if (strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0)
 			{
 				echo "\n<style type='text/css'>".$this->options['hits_ie6_pngfix_THM_CSSSelector']." { behavior: url(". $this->thispluginurl."THM1/iepngfix.php) }</style>";
 			}
@@ -126,16 +131,12 @@ if (!class_exists('hits_ie6_pngfix')) {
 			}
 			else if (strcmp($this->options['hits_ie6_pngfix_method'],'UPNGFIX')==0)
 			{
-				echo "\n<!--[if lt IE 7]>";
         		echo "\n<script type='text/javascript' src='". $this->thispluginurl."UPNGFIX/unitpngfix.js'></script>";
 				echo "\n<script type='text/javascript'>clear = '". $this->thispluginurl."UPNGFIX/clear.gif';</script>";
-				echo "\n<![endif]-->";
 			}
 			else if (strcmp($this->options['hits_ie6_pngfix_method'],'SUPERSLEIGHT')==0)
 			{
-				echo "\n<!--[if lte IE 6]>";
         		echo "\n<script type='text/javascript' src='". $this->thispluginurl."supersleight/supersleight-min.js'></script>";
-				echo "\n<![endif]-->";
 			}
 			
 			echo "\n<![endif]-->\n";
@@ -293,7 +294,8 @@ if (!class_exists('hits_ie6_pngfix')) {
                             <th width="33%" scope="row"><?php _e('PNG Fix Method:', $this->localizationDomain); ?></th> 
                             <td>
                             <select name="hits_ie6_pngfix_method" id="hits_ie6_pngfix_method" style="width:200px;">
-								<option value="THM1"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0) { echo ' selected="selected"';} ?>><?php _e('Twin Helix v1.0', $this->localizationDomain);?></option>
+								<option value="DD_BELATED"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'DD_BELATED')==0) { echo ' selected="selected"';} ?>><?php _e('DD_belatedPNG', $this->localizationDomain);?></option>
+                                <option value="THM1"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0) { echo ' selected="selected"';} ?>><?php _e('Twin Helix v1.0', $this->localizationDomain);?></option>
 								<option value="THM2"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0) { echo ' selected="selected"';} ?>><?php _e('Twin Helix v2.0', $this->localizationDomain);?></option>
 								<option value="UPNGFIX"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'UPNGFIX')==0) { echo ' selected="selected"';} ?>><?php _e('Unit PNG Fix', $this->localizationDomain);?></option>
 								<option value="SUPERSLEIGHT"<?php if (strcmp($this->options['hits_ie6_pngfix_method'],'SUPERSLEIGHT')==0) { echo ' selected="selected"';} ?>><?php _e('SuperSleight', $this->localizationDomain);?></option>
@@ -303,7 +305,7 @@ if (!class_exists('hits_ie6_pngfix')) {
                         </tr>
                         <tr>
                         	<th width="33%" scope="row"><?php _e('CSS Selector:', $this->localizationDomain); ?></th>
-                            <td><input type="text" name="hits_ie6_pngfix_THM_CSSSelector" value="<?php echo $this->options['hits_ie6_pngfix_THM_CSSSelector'] ?>" size="100" /><br /><?php _e('Note: CSS Selector is only used for the Twin Helix methods.', $this->localizationDomain);?></td>
+                            <td><input type="text" name="hits_ie6_pngfix_THM_CSSSelector" value="<?php echo $this->options['hits_ie6_pngfix_THM_CSSSelector'] ?>" size="100" /><br /><?php _e('Note: CSS Selector is not used for Unit PNG Fix and SuperSleight.', $this->localizationDomain);?></td>
 						</tr>
                         <tr>
                             <th colspan=2><input type="submit" name="hits_ie6_pngfix_save" value="Save" /></th>
@@ -312,6 +314,7 @@ if (!class_exists('hits_ie6_pngfix')) {
                     
                     <p><?php _e('Feedback and requests are always welcome.', $this->localizationDomain);?><a href="http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix"><?php _e('Visit the plugin website', $this->localizationDomain);?></a> <?php _e('to leave any feedback, translations, comments or donations. All donations will go towards micro loans through', $this->localizationDomain);?> <a href="http://www.kiva.org">Kiva</a>.</p>
                     <h3><?php _e('PNG Fix Credits', $this->localizationDomain);?></h3>
+                    <p><?php _e('The DD_belatedPNG approach was taken from', $this->localizationDomain);?> <a href="http://dillerdesign.com/experiment/DD_belatedPNG/">DillerDesign</a></p>
                     <p><?php _e('The Twin Helix approaches were taken from', $this->localizationDomain);?> <a href="http://www.twinhelix.com/css/iepngfix/">Twin Helix</a></p>
                     <p><?php _e('The UnitInteractive approach was taken from', $this->localizationDomain);?> <a href="http://labs.unitinteractive.com/unitpngfix.php"> Unit Interactive Labs</a>.</p>
                     <p><?php _e('I was not able to find the original author for SuperSleight, and just found the code searching google. If anyone knows the original author, please let me know so that proper credit can be given.', $this->localizationDomain);?></p>
