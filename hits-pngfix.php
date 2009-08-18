@@ -282,10 +282,9 @@ if (!class_exists('hits_ie6_pngfix')) {
                 <div class="wrap">
                 <h2>HITS- IE6 PNG Fix</h2>
                 <form method="post" id="hits_ie6_pngfix_options">
-                <?php wp_nonce_field('hits_ie6_pngfix-update-options'); 
-				_e('<p>This plugin brought to you for free by <a href="http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix">Home I.T. Solutions</a>.</p>', $this->localizationDomain);
-                _e('<p>I take no credit for the great effort authors have gone into making each method of getting IE6 PNG compatability to work. I just did the work to merge them all into a single wordpress plugin.</p>', $this->localizationDomain);
-					?>
+                <?php wp_nonce_field('hits_ie6_pngfix-update-options');?>
+                <p><?php _e('This plugin brought to you for free by', $this->localizationDomain);?><a href="http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix">Home I.T. Solutions</a>.</p>
+                <p><?php _e('I take no credit for the great effort authors have gone into making each method of getting IE6 PNG compatability to work. I just did the work to merge them all into a single wordpress plugin.', $this->localizationDomain);?></p>
                     <table width="100%" cellspacing="2" cellpadding="5" class="form-table"> 
                         <tr valign="top"> 
                             <th width="33%" scope="row"><?php _e('PNG Fix Method:', $this->localizationDomain); ?></th> 
