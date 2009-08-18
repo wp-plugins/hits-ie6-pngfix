@@ -4,7 +4,7 @@ Donate Link:  http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-f
 Tags: images, plugin, formatting, image, style, compatability, transparency
 Requires at least: 2.7
 Tested up to: 2.8
-Stable tag: 2.4
+Stable tag: 2.5
 
 Adds IE6 Compatability for PNG transparency, courtesy of multiple choices for PNG fixes available
 
@@ -36,7 +36,7 @@ Yes, this is my first plugin. If you have any feedback, please visit my site!
 == Changelog ==
 
 = 2.5 =
-* Fixed UnitPNG and SuperSleight so that there wasn't 2 version checks resulting in there being bad output at the top of page
+* Fixed UnitPNG and SuperSleight so that there wasn't 2 IE version checks resulting in there being bad output at the top of page for IE7
 * Added DD_belatedPNG as another PNG fix method
 
 = 2.4 =
