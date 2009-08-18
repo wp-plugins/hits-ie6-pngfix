@@ -46,7 +46,7 @@ if (!class_exists('hits_ie6_pngfix')) {
         * @var string The options string name for this plugin
         */
         var $optionsName = 'hits_ie6_pngfix_options';
-		var $version = '2.3';
+		var $version = '2.5';
         
         /**
         * @var string $localizationDomain Domain used for localization
@@ -153,7 +153,7 @@ if (!class_exists('hits_ie6_pngfix')) {
             //Don't forget to set up the default options
             if (!$theOptions = get_option($this->optionsName)) 
 			{//default options
-                $theOptions = array('hits_ie6_pngfix_method'=>'THM1', //Added V2.0
+                $theOptions = array('hits_ie6_pngfix_method'=>'DD_BELATED', //Added V2.0, changed to DD_BELATED V2.5
 									'hits_ie6_pngfix_THM_CSSSelector'=>'img, div', //Added V2.1
 									'hits_ie6_pngfix_THM_image_path'=>'Initiated',//Added V2.2
 									'hits_ie6_pngfix_version'=>$this->version //Added V2.3
@@ -187,10 +187,7 @@ if (!class_exists('hits_ie6_pngfix')) {
 				}
 				
 				//upgrading from version 2.2
-				if(strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0 || strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
-				{
-					//there is nothing to upgrade.
-				}
+				$this->options['hits_ie6_pngfix_version']=$this->version;
 			}
 			
 			//if missing options found, update them.
