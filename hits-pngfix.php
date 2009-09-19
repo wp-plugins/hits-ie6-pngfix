@@ -111,30 +111,31 @@ if (!class_exists('hits_ie6_pngfix')) {
         
         function wp_head()
 		{
+			$fixMethod = $this->options['hits_ie6_pngfix_method'];
 			echo "\n";
-			echo "\n<!-- Begin - HITS-IE6 PNGFix -->";
+			echo "\n<!-- Begin - HITS-IE6 PNGFix - $fixMethod -->";
 			if($this->isIE6())
 			{
 				echo "\n<!-- IE6 has been detected as the users browser version -->";
-				if (strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0)
+				if (strcmp($fixMethod,'THM1')==0)
 				{
 					echo "\n<style type='text/css'>".$this->options['hits_ie6_pngfix_THM_CSSSelector']." { behavior: url(". $this->thispluginurl."THM1/iepngfix.php) }</style>";
 				}
-				else if (strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
+				else if (strcmp($fixMethod,'THM2')==0)
 				{
 					echo "\n<style type='text/css'>".$this->options['hits_ie6_pngfix_THM_CSSSelector']." { behavior: url(". $this->thispluginurl."THM2/iepngfix.php) }</style>";
 					echo "\n<script type='text/javascript' src='". $this->thispluginurl."THM2/iepngfix_tilebg.js'></script>";
 				}
-				else if (strcmp($this->options['hits_ie6_pngfix_method'],'UPNGFIX')==0)
+				else if (strcmp($fixMethod,'UPNGFIX')==0)
 				{
 					echo "\n<script type='text/javascript' src='". $this->thispluginurl."UPNGFIX/unitpngfix.js'></script>";
 					echo "\n<script type='text/javascript'>clear = '". $this->thispluginurl."UPNGFIX/clear.gif';</script>";
 				}
-				else if (strcmp($this->options['hits_ie6_pngfix_method'],'SUPERSLEIGHT')==0)
+				else if (strcmp($fixMethod,'SUPERSLEIGHT')==0)
 				{
 					echo "\n<script type='text/javascript' src='". $this->thispluginurl."supersleight/supersleight-min.js'></script>";
 				}
-				else if (strcmp($this->options['hits_ie6_pngfix_method'],'DD_BELATED')==0)
+				else if (strcmp($fixMethod,'DD_BELATED')==0)
 				{
 					echo "\n<script type='text/javascript' src='". $this->thispluginurl."DD_belatedPNG/DD_belatedPNG_0.0.8a-min.js'></script>";
 					echo "\n<script type='text/javascript'>DD_belatedPNG.fix('".$this->options['hits_ie6_pngfix_THM_CSSSelector']."');</script>";
