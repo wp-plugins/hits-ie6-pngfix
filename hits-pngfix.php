@@ -1,7 +1,7 @@
 <?php
 /*
 	Plugin Name: HITS- IE6 PNGFix
-	Version: 2.5
+	Version: 2.6
 	Author: Adam Erstelle
 	Author URI: http://www.homeitsolutions.ca
 	Plugin URI: http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix
