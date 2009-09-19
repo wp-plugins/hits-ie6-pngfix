@@ -113,37 +113,54 @@ if (!class_exists('hits_ie6_pngfix')) {
 		{
 			echo "\n";
 			echo "\n<!-- Begin - HITS-IE6 PNGFix -->";
-			echo "\n<!--[if lte IE 6]>\n";
+			if($this->isIE6())
+			{
+				echo "\n<!-- IE6 has been detected as the users browser version -->";
+				if (strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0)
+				{
+					echo "\n<style type='text/css'>".$this->options['hits_ie6_pngfix_THM_CSSSelector']." { behavior: url(". $this->thispluginurl."THM1/iepngfix.php) }</style>";
+				}
+				else if (strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
+				{
+					echo "\n<style type='text/css'>".$this->options['hits_ie6_pngfix_THM_CSSSelector']." { behavior: url(". $this->thispluginurl."THM2/iepngfix.php) }</style>";
+					echo "\n<script type='text/javascript' src='". $this->thispluginurl."THM2/iepngfix_tilebg.js'></script>";
+				}
+				else if (strcmp($this->options['hits_ie6_pngfix_method'],'UPNGFIX')==0)
+				{
+					echo "\n<script type='text/javascript' src='". $this->thispluginurl."UPNGFIX/unitpngfix.js'></script>";
+					echo "\n<script type='text/javascript'>clear = '". $this->thispluginurl."UPNGFIX/clear.gif';</script>";
+				}
+				else if (strcmp($this->options['hits_ie6_pngfix_method'],'SUPERSLEIGHT')==0)
+				{
+					echo "\n<script type='text/javascript' src='". $this->thispluginurl."supersleight/supersleight-min.js'></script>";
+				}
+				else if (strcmp($this->options['hits_ie6_pngfix_method'],'DD_BELATED')==0)
+				{
+					echo "\n<script type='text/javascript' src='". $this->thispluginurl."DD_belatedPNG/DD_belatedPNG_0.0.8a-min.js'></script>";
+					echo "\n<script type='text/javascript'>DD_belatedPNG.fix('".$this->options['hits_ie6_pngfix_THM_CSSSelector']."');</script>";
+				}
+			}
+			else
+				echo "\n<!-- IE6 is not in use by the users browser -->";
 			
-			if (strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0)
-			{
-				echo "\n<style type='text/css'>".$this->options['hits_ie6_pngfix_THM_CSSSelector']." { behavior: url(". $this->thispluginurl."THM1/iepngfix.php) }</style>";
-			}
-			else if (strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
-			{
-				echo "\n<style type='text/css'>".$this->options['hits_ie6_pngfix_THM_CSSSelector']." { behavior: url(". $this->thispluginurl."THM2/iepngfix.php) }</style>";
-				echo "\n<script type='text/javascript' src='". $this->thispluginurl."THM2/iepngfix_tilebg.js'></script>";
-			}
-			else if (strcmp($this->options['hits_ie6_pngfix_method'],'UPNGFIX')==0)
-			{
-        		echo "\n<script type='text/javascript' src='". $this->thispluginurl."UPNGFIX/unitpngfix.js'></script>";
-				echo "\n<script type='text/javascript'>clear = '". $this->thispluginurl."UPNGFIX/clear.gif';</script>";
-			}
-			else if (strcmp($this->options['hits_ie6_pngfix_method'],'SUPERSLEIGHT')==0)
-			{
-        		echo "\n<script type='text/javascript' src='". $this->thispluginurl."supersleight/supersleight-min.js'></script>";
-			}
-			else if (strcmp($this->options['hits_ie6_pngfix_method'],'DD_BELATED')==0)
-			{
-				echo "\n<script type='text/javascript' src='". $this->thispluginurl."DD_belatedPNG/DD_belatedPNG_0.0.8a-min.js'></script>";
-				echo "\n<script type='text/javascript'>DD_belatedPNG.fix('".$this->options['hits_ie6_pngfix_THM_CSSSelector']."');</script>";
-			}
-			
-			echo "\n<![endif]-->\n";
 			echo "\n<!--  End  - HITS-IE6 PNGFix -->\n";
 			echo "\n";
 		}
         
+		// IE6 Check
+		function isIE6() 
+		{
+			if(preg('/(?i)msie [1-6]/',$_SERVER['HTTP_USER_AGENT']) && !preg_match('/\bopera/i', ,$_SERVER['HTTP_USER_AGENT'])) ) 
+			{
+				// if IE<=6
+				return true;
+			} 
+			else
+			{
+				//if IE>6
+				return false;
+			}
+		}
         
         /**
         * Retrieves the plugin options from the database.
