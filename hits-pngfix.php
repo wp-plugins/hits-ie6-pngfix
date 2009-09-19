@@ -150,7 +150,7 @@ if (!class_exists('hits_ie6_pngfix')) {
 		// IE6 Check
 		function isIE6() 
 		{
-			if(preg('/(?i)msie [1-6]/',$_SERVER['HTTP_USER_AGENT']) && !preg_match('/\bopera/i',$_SERVER['HTTP_USER_AGENT']))  
+			if(preg_match('/(?i)msie [1-6]/',$_SERVER['HTTP_USER_AGENT']) && !preg_match('/\bopera/i',$_SERVER['HTTP_USER_AGENT']))  
 			{
 				// if IE<=6
 				return true;
