@@ -330,7 +330,7 @@ if (!class_exists('hits_ie6_pngfix')) {
                     <h3><?php _e('PNG Fix Credits', $this->localizationDomain);?></h3>
                     <p><?php _e('The Twin Helix approaches were taken from', $this->localizationDomain);?> <a href="http://www.twinhelix.com/css/iepngfix/">Twin Helix</a></p>
                     <p><?php _e('The UnitInteractive approach was taken from', $this->localizationDomain);?> <a href="http://labs.unitinteractive.com/unitpngfix.php"> Unit Interactive Labs</a>.</p>
-                    <p><?php _e('I was not able to find the original author for SuperSleight, and just found the code searching google. If anyone knows the original author, please let me know so that proper credit can be given.', $this->localizationDomain);?></p>
+                    <p><?php _e('The SuperSleight apprach was taken from', $this->localizationDomain);?> <a href="http://allinthehead.com/retro/338/supersleight-jquery-plugin">Drew McLellan</a></p>
                 	<p><?php _e('The DD_belatedPNG approach was taken from', $this->localizationDomain);?> <a href="http://dillerdesign.com/experiment/DD_belatedPNG/">DillerDesign</a></p>
                   </form>
                 <?php
