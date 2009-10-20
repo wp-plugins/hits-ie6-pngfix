@@ -1,7 +1,7 @@
 <?php
 /*
 	Plugin Name: HITS- IE6 PNGFix
-	Version: 2.6
+	Version: 2.7
 	Author: Adam Erstelle
 	Author URI: http://www.homeitsolutions.ca
 	Plugin URI: http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix
@@ -46,7 +46,7 @@ if (!class_exists('hits_ie6_pngfix')) {
         * @var string The options string name for this plugin
         */
         var $optionsName = 'hits_ie6_pngfix_options';
-		var $version = '2.5';
+		var $version = '2.7';
         
         /**
         * @var string $localizationDomain Domain used for localization
@@ -205,6 +205,8 @@ if (!class_exists('hits_ie6_pngfix')) {
 				}
 				
 				//upgrading from version 2.2
+				
+				//set the version and update the database.
 				$this->options['hits_ie6_pngfix_version']=$this->version;
 			}
 			
