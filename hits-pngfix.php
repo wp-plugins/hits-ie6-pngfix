@@ -96,6 +96,9 @@ if (!class_exists('hits_ie6_pngfix')) {
             $this->actions_filters();
         }
 		
+		/*
+		 * Centralized place for adding all actions and filters for the plugin into wordpress
+		*/
 		function actions_filters()
 		{
 			add_action("admin_menu", array(&$this,"admin_menu_link"));
@@ -130,7 +133,9 @@ if (!class_exists('hits_ie6_pngfix')) {
             }
         }
 
-        
+        /*
+		 * Writes the IE6 fix code if IE6 has been detected as the user's browser
+		*/
         function wp_head()
 		{
 			$fixMethod = $this->options['hits_ie6_pngfix_method'];
@@ -241,7 +246,7 @@ if (!class_exists('hits_ie6_pngfix')) {
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         }
         /**
-        * Saves the admin options to the database.
+        * @desc Saves the admin options to the database.
         */
         function saveAdminOptions(){
 			$this->options['hits_ie6_pngfix_THM_image_path']="";
@@ -325,7 +330,7 @@ if (!class_exists('hits_ie6_pngfix')) {
                 <h2>HITS- IE6 PNG Fix</h2>
                 <form method="post" id="hits_ie6_pngfix_options">
                 <?php wp_nonce_field('hits_ie6_pngfix-update-options');?>
-                <p><?php _e('This plugin brought to you for free by', $this->localizationDomain);?><a href="http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix">Home I.T. Solutions</a>.</p>
+                <p><?php _e('This plugin brought to you for free by ', $this->localizationDomain);?><a href="http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix">Home I.T. Solutions</a>.</p>
                 <p><?php _e('I take no credit for the great effort authors have gone into making each method of getting IE6 PNG compatability to work. I just did the work to merge them all into a single wordpress plugin.', $this->localizationDomain);?></p>
                     <table width="100%" cellspacing="2" cellpadding="5" class="form-table"> 
                         <tr valign="top"> 
@@ -350,7 +355,7 @@ if (!class_exists('hits_ie6_pngfix')) {
                         </tr>
                     </table>
                     
-                    <p><?php _e('Feedback and requests are always welcome.', $this->localizationDomain);?><a href="http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix"><?php _e('Visit the plugin website', $this->localizationDomain);?></a> <?php _e('to leave any feedback, translations, comments or donations. All donations will go towards micro loans through', $this->localizationDomain);?> <a href="http://www.kiva.org">Kiva</a>.</p>
+                    <p><?php _e('Feedback and requests are always welcome. ', $this->localizationDomain);?><a href="http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix"> <?php _e('Visit the plugin website', $this->localizationDomain);?></a> <?php _e('to leave any feedback, translations, comments or donations. All donations will go towards micro loans through', $this->localizationDomain);?> <a href="http://www.kiva.org">Kiva</a>.</p>
                     <h3><?php _e('PNG Fix Credits', $this->localizationDomain);?></h3>
                     <p><?php _e('The Twin Helix approaches were taken from', $this->localizationDomain);?> <a href="http://www.twinhelix.com/css/iepngfix/">Twin Helix</a></p>
                     <p><?php _e('The UnitInteractive approach was taken from', $this->localizationDomain);?> <a href="http://labs.unitinteractive.com/unitpngfix.php"> Unit Interactive Labs</a>.</p>
