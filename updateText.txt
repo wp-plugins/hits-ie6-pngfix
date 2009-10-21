@@ -1,1 +1,1 @@
-What's new eh?
+<span style="color: red; font-variant: small-caps; font-weight: bold;">Version 2.8 Changes: </span>This box appears.
