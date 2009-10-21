@@ -3,8 +3,8 @@ Contributors: wpgwiggum
 Donate Link:  http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix 
 Tags: images, plugin, formatting, image, style, compatability, transparency
 Requires at least: 2.7
-Tested up to: 2.8
-Stable tag: 2.6
+Tested up to: 2.8.4
+Stable tag: 2.7
 
 Adds IE6 Compatability for PNG transparency, courtesy of multiple choices for PNG fixes available
 
@@ -28,12 +28,28 @@ This section describes how to install the plugin and get it working.
 
 Yes, this is my first plugin. If you have any feedback, please visit my site!
 
+= Why doesn't the plugin work with my site? =
+
+After troubleshooting a few sites, there are usually a couple things to look for in your rendered HTML in IE6.
+1. Make sure your CSS is applied prior to this plugin's code in your HEAD tags.
+1. Make sure you have the correct CSS selectors defined (if applicable)
+1. Check to see how the image is applied in CSS. I don't know how picky the fixes are.
+
+= There are many options to choose from, which is the best? =
+
+Unfortunately there isn't a single best PNG Fix method, otherwise everyone would be using it! Depending on how you have constructed your site, any of the fix methods offered can be the best for your situation. It might take a little testing, but you will find which one works best for you.
+
 == Screenshots ==
 
 1. This is the settings page. Pretty simple.
 2. These are the various options you can select. After clicking save you are done!
 
 == Changelog ==
+
+= 2.7 =
+* Gave appropriate credit to SuperSleight creator
+* Updated FAQ
+* [Updated October 20, 2009]
 
 = 2.6 =
 * Changed IE6 detection method to rely on PHP code rather than HTML checks. Increases reliability of correctly making detection.
