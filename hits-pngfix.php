@@ -1,7 +1,7 @@
 <?php
 /*
 	Plugin Name: HITS- IE6 PNGFix
-	Version: 2.7
+	Version: 2.8
 	Author: Adam Erstelle
 	Author URI: http://www.homeitsolutions.ca
 	Plugin URI: http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix
@@ -46,7 +46,8 @@ if (!class_exists('hits_ie6_pngfix')) {
         * @var string The options string name for this plugin
         */
         var $optionsName = 'hits_ie6_pngfix_options';
-		var $version = '2.7';
+        var $wp_version;
+		var $version = '2.8';
         
         /**
         * @var string $localizationDomain Domain used for localization
@@ -85,29 +86,50 @@ if (!class_exists('hits_ie6_pngfix')) {
             //"Constants" setup
             $this->thispluginurl = WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)).'/';
             $this->thispluginpath = WP_PLUGIN_DIR . '/' . dirname(plugin_basename(__FILE__)).'/';
+			
+			global $wp_version;
+            $this->wp_version = substr(str_replace('.', '', $wp_version), 0, 2);
             
             //Initialize the options
             //This is REQUIRED to initialize the options when the plugin is loaded!
             $this->getOptions();
-            
-            //Actions        
-            add_action("admin_menu", array(&$this,"admin_menu_link"));
-
-            
-            //Widget Registration Actions
-           // add_action('plugins_loaded', array(&$this,'register_widgets'));
-            
-            
-            add_action('wp_head', array(&$this,'wp_head'));
-            /*
-			add_action('wp_print_scripts', array(&$this, 'add_js'));
-            */
-            
-            //Filters
-            /*
-            add_filter('the_content', array(&$this, 'filter_content'), 0);
-            */
+            $this->actions_filters();
         }
+		
+		function actions_filters()
+		{
+			add_action("admin_menu", array(&$this,"admin_menu_link"));
+			add_action('wp_head', array(&$this,'wp_head'));
+			add_action('admin_head', array(&$this, 'admin_head'));
+			
+			add_action('after_plugin_row', array(&$this,'plugin_check_version'), 10, 2);
+		}
+		
+		function admin_head()
+		{
+            echo('<link rel="stylesheet" href="'.$this->thispluginurl.'css/admin.css" type="text/css" media="screen" />');			
+		}
+		
+        function plugin_check_version($file, $plugin_data) 
+		{
+            static $this_plugin;
+            if (!$this_plugin) $this_plugin = plugin_basename(__FILE__);
+
+            if ($file == $this_plugin){
+                $current = $this->wp_version < 28 ? get_option('update_plugins') : get_transient('update_plugins');
+                if (!isset($current->response[$file])) return false;
+
+                $columns = $this->wp_version < 28 ? 5 : 3;
+                $url = "http://svn.wp-plugins.org/hits-ie6-pngfix/trunk/updateText.txt";
+                $update = wp_remote_fopen($url);
+                if ($update != "") {
+                    echo '<td colspan="'.$columns.'" class="hits-plugin-update"><div class="hits-plugin-update-message">';
+                    echo $update;
+                    echo '</div></td>';
+                }
+            }
+        }
+
         
         function wp_head()
 		{
