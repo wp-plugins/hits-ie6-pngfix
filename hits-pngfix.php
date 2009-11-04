@@ -6,6 +6,7 @@
 	Author URI: http://www.homeitsolutions.ca
 	Plugin URI: http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix
 	Description: Adds IE6 Compatability for PNG transparency, using 1 of 5 configured approaches
+	Text Domain: hits-ie6-pngfix
 	
 	PLEASE NOTE: If you make any modifications to this plugin file directly, please contact me so that
 	             the plugin can be updated for others to enjoy the same freedom and functionality you
@@ -178,7 +179,7 @@ if (!class_exists('hits_ie6_pngfix')) {
 		// IE6 Check
 		function isIE6() 
 		{
-			if(preg_match('/(?i)msie [1-6]/',$_SERVER['HTTP_USER_AGENT']) && !preg_match('/\bopera/i',$_SERVER['HTTP_USER_AGENT']))  
+			if(preg_match('/msie [1-6]/i',$_SERVER['HTTP_USER_AGENT']) && !preg_match('/\bopera/i',$_SERVER['HTTP_USER_AGENT']))  
 			{
 				// if IE<=6
 				return true;
