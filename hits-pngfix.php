@@ -180,7 +180,7 @@ if (!class_exists('hits_ie6_pngfix')) {
 		function isIE6() 
 		{
 			$userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
-			if(preg_match('/bmsie [1-6]/',$userAgent) && !preg_match('/\bopera/',$userAgent))  
+			if(preg_match('/\bmsie [1-6]/',$userAgent) && !preg_match('/\bopera/',$userAgent))  
 			{
 				// if IE<=6
 				return true;
