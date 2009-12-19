@@ -49,6 +49,7 @@ Unfortunately there isn't a single best PNG Fix method, otherwise everyone would
 = 2.8 =
 * Added ability to show what has changed in the latest release right in the Plugin Listings
 * Tweaked regex for the IE detection and case sensitivity
+* [Updated December 18, 2009]
 
 = 2.7 =
 * Gave appropriate credit to SuperSleight creator
