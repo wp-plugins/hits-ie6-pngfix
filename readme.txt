@@ -3,8 +3,8 @@ Contributors: wpgwiggum
 Donate Link:  http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix 
 Tags: images, plugin, formatting, image, style, compatability, transparency
 Requires at least: 2.7
-Tested up to: 2.8.5
-Stable tag: 2.7
+Tested up to: 2.9
+Stable tag: 2.8
 
 Adds IE6 Compatability for PNG transparency, courtesy of multiple choices for PNG fixes available
 
@@ -45,6 +45,11 @@ Unfortunately there isn't a single best PNG Fix method, otherwise everyone would
 2. These are the various options you can select. After clicking save you are done!
 
 == Changelog ==
+
+= 2.8 =
+* Added ability to show what has changed in the latest release right in the Plugin Listings
+* Tweaked regex for the IE detection and case sensitivity
+* [Updated December 18, 2009]
 
 = 2.7 =
 * Gave appropriate credit to SuperSleight creator
