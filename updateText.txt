@@ -1,1 +1,1 @@
-<span style="color: red; font-variant: small-caps; font-weight: bold;">Version 2.8 Changes: </span>This box appears, and a tweak to the code for detecting IE6
+<span style="color: red; font-variant: small-caps; font-weight: bold;">Version 2.9 Changes: </span>Code for upgrading plugin options for new versions fixed, broken blank.gif file fixed when upgrading

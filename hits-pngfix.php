@@ -1,7 +1,7 @@
 <?php
 /*
 	Plugin Name: HITS- IE6 PNGFix
-	Version: 2.8
+	Version: 2.9
 	Author: Adam Erstelle
 	Author URI: http://www.homeitsolutions.ca
 	Plugin URI: http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix
@@ -48,7 +48,7 @@ if (!class_exists('hits_ie6_pngfix')) {
         */
         var $optionsName = 'hits_ie6_pngfix_options';
         var $wp_version;
-		var $version = '2.8';
+		var $version = '2.9';
         
         /**
         * @var string $localizationDomain Domain used for localization
@@ -210,10 +210,10 @@ if (!class_exists('hits_ie6_pngfix')) {
             $this->options = $theOptions;
             
 			//check for missing fields on an upgrade
-			
 			$missingOptions=false;
-			if(!$this->options['hits_ie6_pngfix_version'] || (strcmp($this->options['hits_ie6_pngfix_version'],$this->version)==0))
+			if(!$this->options['hits_ie6_pngfix_version'] || (strcmp($this->options['hits_ie6_pngfix_version'],$this->version)!=0))
 			{
+			echo "\n<!--  Missing Options -->\n";
 				$missingOptions=true;
 				//an upgrade, run upgrade specific tasks.
 				
@@ -231,6 +231,9 @@ if (!class_exists('hits_ie6_pngfix')) {
 						$this->options['hits_ie6_pngfix_THM_image_path'] = $this->thispluginurl."THM1/blank.gif";
 					else if(strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
 						$this->options['hits_ie6_pngfix_THM_image_path'] = $this->thispluginurl."THM2/blank.gif";
+					$this->options['hits_ie6_pngfix_THM_image_path']='InitiatedV2.9';
+					
+					$this->persist_optionsFile();
 				}
 				
 				//upgrading from version 2.2
@@ -258,6 +261,14 @@ if (!class_exists('hits_ie6_pngfix')) {
 				$this->options['hits_ie6_pngfix_THM_image_path'] = $this->thispluginurl."THM2/blank.gif";
 			//save image path to a file so that the php referenced by CSS (outside of wordpress context)
 			//can get the location of the file.
+			$this->persist_optionsFile();
+
+			//save options to database
+			return update_option($this->optionsName, $this->options);
+        }
+		
+		function persist_optionsFile()
+		{
 			$propFile = $this->thispluginpath.'hits-pngfix.properties';
 			if($this->is__writable($propFile))
 			{
@@ -265,10 +276,7 @@ if (!class_exists('hits_ie6_pngfix')) {
 				fwrite($propFileHandle,$this->options['hits_ie6_pngfix_THM_image_path']);
 				fclose($propFileHandle);
 			}
-
-			//save options to database
-			return update_option($this->optionsName, $this->options);
-        }
+		}
 		
 		//following code taken from http://us.php.net/manual/en/function.is-writable.php
 		function is__writable($path) {
