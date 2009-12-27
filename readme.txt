@@ -4,7 +4,7 @@ Donate Link:  http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-f
 Tags: images, plugin, formatting, image, style, compatability, transparency
 Requires at least: 2.7
 Tested up to: 2.9
-Stable tag: 2.8
+Stable tag: 2.9
 
 Adds IE6 Compatability for PNG transparency, courtesy of multiple choices for PNG fixes available
 
@@ -45,6 +45,11 @@ Unfortunately there isn't a single best PNG Fix method, otherwise everyone would
 2. These are the various options you can select. After clicking save you are done!
 
 == Changelog ==
+
+= 2.9 =
+* Fixed logic issue in code that handles upgrading the plugin version
+* Proprty file for saving path of the plugin for .htc now attempted to write more often
+* [Updated December 27, 2009]
 
 = 2.8 =
 * Added ability to show what has changed in the latest release right in the Plugin Listings
