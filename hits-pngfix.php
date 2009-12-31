@@ -1,7 +1,7 @@
 <?php
 /*
 	Plugin Name: HITS- IE6 PNGFix
-	Version: 2.9
+	Version: 2.9.1
 	Author: Adam Erstelle
 	Author URI: http://www.homeitsolutions.ca
 	Plugin URI: http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix
@@ -48,7 +48,7 @@ if (!class_exists('hits_ie6_pngfix')) {
         */
         var $optionsName = 'hits_ie6_pngfix_options';
         var $wp_version;
-		var $version = '2.9';
+		var $version = '2.9.1';
         
         /**
         * @var string $localizationDomain Domain used for localization
@@ -81,7 +81,7 @@ if (!class_exists('hits_ie6_pngfix')) {
         function __construct(){
             //Language Setup
             $locale = get_locale();
-            $mo = dirname(__FILE__) . "/languages/" . $this->localizationDomain . "-".$locale.".mo";
+            $mo = dirname(__FILE__) . "/languages/" . strtolower($this->localizationDomain) . "-".strtolower($locale).".mo";
             load_textdomain($this->localizationDomain, $mo);
 
             //"Constants" setup
