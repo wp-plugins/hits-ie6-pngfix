@@ -1,7 +1,7 @@
 <?php
 /*
 	Plugin Name: HITS- IE6 PNGFix
-	Version: 2.9.1
+	Version: 3.0
 	Author: Adam Erstelle
 	Author URI: http://www.homeitsolutions.ca
 	Plugin URI: http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix
@@ -48,7 +48,7 @@ if (!class_exists('hits_ie6_pngfix')) {
         */
         var $optionsName = 'hits_ie6_pngfix_options';
         var $wp_version;
-		var $version = '2.9.1';
+		var $version = '3.0';
         
         /**
         * @var string $localizationDomain Domain used for localization
@@ -140,8 +140,13 @@ if (!class_exists('hits_ie6_pngfix')) {
         function wp_head()
 		{
 			$fixMethod = $this->options['hits_ie6_pngfix_method'];
+			global $wp_version;
 			echo "\n";
-			echo "\n<!-- Begin - HITS-IE6 PNGFix - $fixMethod -->";
+			echo "\n<!-- Begin - HITS-IE6 PNGFix -->";
+			if($this->options['hits_ie6_debug']=='true')
+			{
+				echo "\n<!-- DEBUG: Plugin Version=$this->version\n     DEBUG: Fix Method=$fixMethod -->";
+			}
 			if($this->isIE6())
 			{
 				echo "\n<!-- IE6 has been detected as the users browser version -->";
@@ -180,7 +185,9 @@ if (!class_exists('hits_ie6_pngfix')) {
 		function isIE6() 
 		{
 			$userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
-			if(preg_match('/\bmsie [1-6]/',$userAgent) && !preg_match('/\bopera/',$userAgent))  
+			if($this->options['hits_ie6_debug']=="true")
+				echo "\n<!-- DEBUG: HTTP_USER_AGENT='$userAgent' -->";
+			if(preg_match("/\bmsie [1-6]/i",$userAgent) && !preg_match("/\bopera/i",$userAgent))  
 			{
 				// if IE<=6
 				return true;
@@ -203,7 +210,8 @@ if (!class_exists('hits_ie6_pngfix')) {
                 $theOptions = array('hits_ie6_pngfix_method'=>'THM1', //Added V2.0
 									'hits_ie6_pngfix_THM_CSSSelector'=>'img, div', //Added V2.1
 									'hits_ie6_pngfix_THM_image_path'=>'Initiated',//Added V2.2
-									'hits_ie6_pngfix_version'=>$this->version //Added V2.3
+									'hits_ie6_pngfix_version'=>$this->version, //Added V2.3
+									'hits_ie6_debug'=>"false" //Added V3.0
 									);
                 update_option($this->optionsName, $theOptions);
             }
@@ -240,6 +248,12 @@ if (!class_exists('hits_ie6_pngfix')) {
 				
 				//set the version and update the database.
 				$this->options['hits_ie6_pngfix_version']=$this->version;
+				
+				//added in 3.0
+				if(!$this->options['hits_ie6_debug'])
+				{
+					$this->options['hits_ie6_debug']="false";
+				}
 			}
 			
 			//if missing options found, update them.
@@ -275,6 +289,11 @@ if (!class_exists('hits_ie6_pngfix')) {
 				$propFileHandle = @fopen($propFile, 'w') or die("can't open file");
 				fwrite($propFileHandle,$this->options['hits_ie6_pngfix_THM_image_path']);
 				fclose($propFileHandle);
+			}
+			else
+			{
+				if($this->options['hits_ie6_debug']=='true')
+					echo "<!-- DEBUG: Options file is not writeable -->";
 			}
 		}
 		
@@ -331,6 +350,7 @@ if (!class_exists('hits_ie6_pngfix')) {
                 if (! wp_verify_nonce($_POST['_wpnonce'], 'hits_ie6_pngfix-update-options') ) die(_e('Whoops! There was a problem with the data you posted. Please go back and try again.', $this->localizationDomain)); 
                 $this->options['hits_ie6_pngfix_method'] = $_POST['hits_ie6_pngfix_method'];   
 				$this->options['hits_ie6_pngfix_THM_CSSSelector'] = $_POST['hits_ie6_pngfix_THM_CSSSelector'];
+				$this->options['hits_ie6_debug']= $_POST['hits_ie6_debug'];
                 $this->saveAdminOptions();
                 
                 echo '<div class="updated"><p>'. __('Success! Your changes were sucessfully saved!', $this->localizationDomain) .'</p></div>';
@@ -360,6 +380,15 @@ if (!class_exists('hits_ie6_pngfix')) {
                         	<th width="33%" scope="row"><?php _e('CSS Selector:', $this->localizationDomain); ?></th>
                             <td><input type="text" name="hits_ie6_pngfix_THM_CSSSelector" value="<?php echo $this->options['hits_ie6_pngfix_THM_CSSSelector'] ?>" size="100" /><br /><?php _e('Note: CSS Selector is not used for Unit PNG Fix and SuperSleight.', $this->localizationDomain);?></td>
 						</tr>
+                        <tr>
+                        	<th width="33%" scope="row"><?php _e('Plugin Debug Mode:', $this->localizationDomain); ?></th>
+                            <td>
+                            <select name="hits_ie6_debug" id="hits_ie6_debug" style="width:100px;">
+                            	<option value="false" <?php if (strcmp($this->options['hits_ie6_debug'],'false')==0) { echo ' selected="selected"';} ?>><?php _e('False',$this->localizationDomain);?></option>
+                            	<option value="true" <?php if (strcmp($this->options['hits_ie6_debug'],'true')==0) { echo ' selected="selected"';} ?>><?php _e('True',$this->localizationDomain);?></option>
+                            </select><br /><?php _e('Note: Please set this to true if you are having difficulties with this plugin.', $this->localizationDomain);?>
+                            </td>
+                        </tr>
                         <tr>
                             <th colspan=2><input type="submit" name="hits_ie6_pngfix_save" value="Save" /></th>
                         </tr>
