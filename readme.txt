@@ -4,7 +4,7 @@ Donate Link:  http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-f
 Tags: images, plugin, formatting, image, style, compatability, transparency
 Requires at least: 2.7
 Tested up to: 2.9
-Stable tag: 2.9
+Stable tag: 3.0
 
 Adds IE6 Compatability for PNG transparency, courtesy of multiple choices for PNG fixes available
 
@@ -28,6 +28,8 @@ This section describes how to install the plugin and get it working.
 
 Yes, this is my first plugin. If you have any feedback, please visit my site!
 
+I am trying to get another plugin hosted, but can't get it live. If you have any suggestions on helping, please let me know!
+
 = Why doesn't the plugin work with my site? =
 
 After troubleshooting a few sites, there are usually a couple things to look for in your rendered HTML in IE6.
@@ -45,6 +47,11 @@ Unfortunately there isn't a single best PNG Fix method, otherwise everyone would
 2. These are the various options you can select. After clicking save you are done!
 
 == Changelog ==
+
+= 3.0 =
+* French localization added, courtesy of Benoit
+* Added a plugin Debug mode, providing more details via HTML comments for troubleshooting
+* [Updated February 26, 2010]
 
 = 2.9 =
 * Fixed logic issue in code that handles upgrading the plugin version
