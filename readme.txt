@@ -48,6 +48,10 @@ Unfortunately there isn't a single best PNG Fix method, otherwise everyone would
 
 == Changelog ==
 
+= 3.0.1 =
+* Tested for WordPress 3.0
+* [Updated May 12, 2010]
+
 = 3.0 =
 * French localization added, courtesy of Benoit
 * Added a plugin Debug mode, providing more details via HTML comments for troubleshooting

@@ -1,1 +1,1 @@
-<span style="color: red; font-variant: small-caps; font-weight: bold;">Version 3.0 Changes: </span>French translation added, optional debug mode.
+<span style="color: red; font-variant: small-caps; font-weight: bold;">Version 3.0.1 Changes: </span>Tested for WordPress 3.0.
