@@ -48,6 +48,10 @@ Unfortunately there isn't a single best PNG Fix method, otherwise everyone would
 
 == Changelog ==
 
+= 3.1.0 =
+* Added support for pages that are cached
+* [Updated June 12, 2010]
+
 = 3.0.2 =
 * Tested for WordPress 3.0
 * [Updated May 12, 2010]

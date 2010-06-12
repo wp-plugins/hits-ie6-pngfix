@@ -1,7 +1,7 @@
 <?php
 /*
 	Plugin Name: HITS- IE6 PNGFix
-	Version: 3.0.2
+	Version: 3.1.0
 	Author: Adam Erstelle
 	Author URI: http://www.homeitsolutions.ca
 	Plugin URI: http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix
@@ -48,7 +48,7 @@ if (!class_exists('hits_ie6_pngfix')) {
         */
         var $optionsName = 'hits_ie6_pngfix_options';
         var $wp_version;
-		var $version = '3.0.2';
+		var $version = '3.1.0';
         
         /**
         * @var string $localizationDomain Domain used for localization
@@ -140,61 +140,96 @@ if (!class_exists('hits_ie6_pngfix')) {
         function wp_head()
 		{
 			$fixMethod = $this->options['hits_ie6_pngfix_method'];
+			$pagesAreCached = $this->options['hits_ie6_pngfix_pagesAreCached'];
+			
 			global $wp_version;
 			echo "\n";
 			echo "\n<!-- Begin - HITS-IE6 PNGFix -->";
 			if($this->options['hits_ie6_debug']=='true')
 			{
-				echo "\n<!-- DEBUG: Plugin Version=$this->version\n     DEBUG: Fix Method=$fixMethod -->";
+				echo "\n<!-- DEBUG: Plugin Version=$this->version\n     DEBUG: Fix Method=$fixMethod\n     DEBUG: PagesAreCached=$pagesAreCached -->";
 			}
-			if($this->isIE6())
+			if($pagesAreCached=='false')
 			{
-				echo "\n<!-- IE6 has been detected as the users browser version -->";
-				if (strcmp($fixMethod,'THM1')==0)
+				if($this->isIE6())
 				{
-					echo "\n<style type='text/css'>".$this->options['hits_ie6_pngfix_THM_CSSSelector']." { behavior: url(". $this->thispluginurl."THM1/iepngfix.php) }</style>";
+					echo "\n<!-- IE6 has been detected as the users browser version by the server -->";
+					$this->write_ie6_fix_nodes($fixMethod);
 				}
-				else if (strcmp($fixMethod,'THM2')==0)
-				{
-					echo "\n<style type='text/css'>".$this->options['hits_ie6_pngfix_THM_CSSSelector']." { behavior: url(". $this->thispluginurl."THM2/iepngfix.php) }</style>";
-					echo "\n<script type='text/javascript' src='". $this->thispluginurl."THM2/iepngfix_tilebg.js'></script>";
-				}
-				else if (strcmp($fixMethod,'UPNGFIX')==0)
-				{
-					echo "\n<script type='text/javascript' src='". $this->thispluginurl."UPNGFIX/unitpngfix.js'></script>";
-					echo "\n<script type='text/javascript'>clear = '". $this->thispluginurl."UPNGFIX/clear.gif';</script>";
-				}
-				else if (strcmp($fixMethod,'SUPERSLEIGHT')==0)
-				{
-					echo "\n<script type='text/javascript' src='". $this->thispluginurl."supersleight/supersleight-min.js'></script>";
-				}
-				else if (strcmp($fixMethod,'DD_BELATED')==0)
-				{
-					echo "\n<script type='text/javascript' src='". $this->thispluginurl."DD_belatedPNG/DD_belatedPNG_0.0.8a-min.js'></script>";
-					echo "\n<script type='text/javascript'>DD_belatedPNG.fix('".$this->options['hits_ie6_pngfix_THM_CSSSelector']."');</script>";
-				}
+				else
+					echo "\n<!-- IE6 has not been detected as the users browser version by the server -->";
 			}
 			else
-				echo "\n<!-- IE6 is not in use by the users browser -->";
+			{
+				echo "\n<!-- The browser itself will determine if IE6 code will be used -->";
+				echo "\n<!--[if lte IE 6]>";
+				$this->write_ie6_fix_nodes($fixMethod);
+				echo "\n<![endif] -->";
+			}
 			
 			echo "\n<!--  End  - HITS-IE6 PNGFix -->\n";
 			echo "\n";
 		}
+		
+		function write_ie6_fix_nodes($fixMethod)
+		{
+			if (strcmp($fixMethod,'THM1')==0)
+			{
+				echo "\n<style type='text/css'>".$this->options['hits_ie6_pngfix_THM_CSSSelector']." { behavior: url(". $this->thispluginurl."THM1/iepngfix.php) }</style>";
+			}
+			else if (strcmp($fixMethod,'THM2')==0)
+			{
+				echo "\n<style type='text/css'>".$this->options['hits_ie6_pngfix_THM_CSSSelector']." { behavior: url(". $this->thispluginurl."THM2/iepngfix.php) }</style>";
+				echo "\n<script type='text/javascript' src='". $this->thispluginurl."THM2/iepngfix_tilebg.js'></script>";
+			}
+			else if (strcmp($fixMethod,'UPNGFIX')==0)
+			{
+				echo "\n<script type='text/javascript' src='". $this->thispluginurl."UPNGFIX/unitpngfix.js'></script>";
+				echo "\n<script type='text/javascript'>clear = '". $this->thispluginurl."UPNGFIX/clear.gif';</script>";
+			}
+			else if (strcmp($fixMethod,'SUPERSLEIGHT')==0)
+			{
+				echo "\n<script type='text/javascript' src='". $this->thispluginurl."supersleight/supersleight-min.js'></script>";
+			}
+			else if (strcmp($fixMethod,'DD_BELATED')==0)
+			{
+				echo "\n<script type='text/javascript' src='". $this->thispluginurl."DD_belatedPNG/DD_belatedPNG_0.0.8a-min.js'></script>";
+				echo "\n<script type='text/javascript'>DD_belatedPNG.fix('".$this->options['hits_ie6_pngfix_THM_CSSSelector']."');</script>";
+			}
+		}
         
 		// IE6 Check
-		function isIE6() 
+		function isIE6()
 		{
-			$userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
-			if($this->options['hits_ie6_debug']=="true")
+			$browser = 'mozilla';
+			$majorVersion = 5;
+		
+			if(get_cfg_var('browscap')) 
+			{
+				$browserTab = get_browser();
+				$browser = strtolower($browserTab->browser);
+				$majorVersion = intval($browserTab->majorver);
+			}
+			else 
+			{
+				$userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
+				if (preg_match('|msie ([0-9]).[0-9]{1,2}|',$userAgent,$matched)) 
+				{
+					$browser = 'ie';
+					$majorVersion = intval($matched[1]);
+				}
+			}
+		
+			if($this->options['hits_ie6_debug']=="true") {
 				echo "\n<!-- DEBUG: HTTP_USER_AGENT='$userAgent' -->";
-			if(preg_match("/\bmsie [1-6]/i",$userAgent) && !preg_match("/\bopera/i",$userAgent))  
-			{
-				// if IE<=6
+				echo "\n<!-- DEBUG: DETECT BROWSER='$browser' -->";
+				echo "\n<!-- DEBUG: DETECT M VERSION='$majorVersion' -->";
+			}
+		
+			if($browser == 'ie' && $majorVersion <= 6) { // if IE<=6
 				return true;
-			} 
-			else
-			{
-				//if IE>6
+			}
+			else { //if IE>6
 				return false;
 			}
 		}
@@ -211,7 +246,8 @@ if (!class_exists('hits_ie6_pngfix')) {
 									'hits_ie6_pngfix_THM_CSSSelector'=>'img, div', //Added V2.1
 									'hits_ie6_pngfix_THM_image_path'=>'Initiated',//Added V2.2
 									'hits_ie6_pngfix_version'=>$this->version, //Added V2.3
-									'hits_ie6_debug'=>"false" //Added V3.0
+									'hits_ie6_debug'=>"false", //Added V3.0
+									'hits_ie6_pngfix_pagesAreCached'=>'false' //Added V3.1
 									);
                 update_option($this->optionsName, $theOptions);
             }
@@ -221,7 +257,6 @@ if (!class_exists('hits_ie6_pngfix')) {
 			$missingOptions=false;
 			if(!$this->options['hits_ie6_pngfix_version'] || (strcmp($this->options['hits_ie6_pngfix_version'],$this->version)!=0))
 			{
-			echo "\n<!--  Missing Options -->\n";
 				$missingOptions=true;
 				//an upgrade, run upgrade specific tasks.
 				
@@ -239,7 +274,8 @@ if (!class_exists('hits_ie6_pngfix')) {
 						$this->options['hits_ie6_pngfix_THM_image_path'] = $this->thispluginurl."THM1/blank.gif";
 					else if(strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
 						$this->options['hits_ie6_pngfix_THM_image_path'] = $this->thispluginurl."THM2/blank.gif";
-					$this->options['hits_ie6_pngfix_THM_image_path']='InitiatedV2.9';
+					else
+						$this->options['hits_ie6_pngfix_THM_image_path']='InitiatedV2.9';
 					
 					$this->persist_optionsFile();
 				}
@@ -253,6 +289,12 @@ if (!class_exists('hits_ie6_pngfix')) {
 				if(!$this->options['hits_ie6_debug'])
 				{
 					$this->options['hits_ie6_debug']="false";
+				}
+				
+				//added in 3.1
+				if(!$this->options['hits_ie6_pngfix_pagesAreCached'])
+				{
+					$this->options['hits_ie6_pngfix_pagesAreCached']='false';	
 				}
 			}
 			
@@ -351,6 +393,7 @@ if (!class_exists('hits_ie6_pngfix')) {
                 $this->options['hits_ie6_pngfix_method'] = $_POST['hits_ie6_pngfix_method'];   
 				$this->options['hits_ie6_pngfix_THM_CSSSelector'] = $_POST['hits_ie6_pngfix_THM_CSSSelector'];
 				$this->options['hits_ie6_debug']= $_POST['hits_ie6_debug'];
+				$this->options['hits_ie6_pngfix_pagesAreCached'] = $_POST['hits_ie6_pngfix_pagesAreCached'];
                 $this->saveAdminOptions();
                 
                 echo '<div class="updated"><p>'. __('Success! Your changes were sucessfully saved!', $this->localizationDomain) .'</p></div>';
@@ -380,6 +423,15 @@ if (!class_exists('hits_ie6_pngfix')) {
                         	<th width="33%" scope="row"><?php _e('CSS Selector:', $this->localizationDomain); ?></th>
                             <td><input type="text" name="hits_ie6_pngfix_THM_CSSSelector" value="<?php echo $this->options['hits_ie6_pngfix_THM_CSSSelector'] ?>" size="100" /><br /><?php _e('Note: CSS Selector is not used for Unit PNG Fix and SuperSleight.', $this->localizationDomain);?></td>
 						</tr>
+                        <tr valign="top"> 
+                            <th width="33%" scope="row"><?php _e('Pages are:', $this->localizationDomain); ?></th> 
+                            <td>
+                            <select name="hits_ie6_pngfix_pagesAreCached" id="hits_ie6_pngfix_pagesAreCached" style="width:200px;">
+								<option value="false"<?php if (strcmp($this->options['hits_ie6_pngfix_pagesAreCached'],'false')==0) { echo ' selected="selected"';} ?>><?php _e('not cached', $this->localizationDomain);?></option>
+								<option value="true"<?php if (strcmp($this->options['hits_ie6_pngfix_pagesAreCached'],'true')==0) { echo ' selected="selected"';} ?>><?php _e('cached', $this->localizationDomain);?></option>
+							</select>
+                        </td> 
+                        </tr>
                         <tr>
                         	<th width="33%" scope="row"><?php _e('Plugin Debug Mode:', $this->localizationDomain); ?></th>
                             <td>
