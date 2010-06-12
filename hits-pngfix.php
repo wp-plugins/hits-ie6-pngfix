@@ -1,7 +1,7 @@
 <?php
 /*
 	Plugin Name: HITS- IE6 PNGFix
-	Version: 3.1.0
+	Version: 3.1.1
 	Author: Adam Erstelle
 	Author URI: http://www.homeitsolutions.ca
 	Plugin URI: http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix
@@ -48,7 +48,7 @@ if (!class_exists('hits_ie6_pngfix')) {
         */
         var $optionsName = 'hits_ie6_pngfix_options';
         var $wp_version;
-		var $version = '3.1.0';
+		var $version = '3.1.1';
         
         /**
         * @var string $localizationDomain Domain used for localization
@@ -424,12 +424,12 @@ if (!class_exists('hits_ie6_pngfix')) {
                             <td><input type="text" name="hits_ie6_pngfix_THM_CSSSelector" value="<?php echo $this->options['hits_ie6_pngfix_THM_CSSSelector'] ?>" size="100" /><br /><?php _e('Note: CSS Selector is not used for Unit PNG Fix and SuperSleight.', $this->localizationDomain);?></td>
 						</tr>
                         <tr valign="top"> 
-                            <th width="33%" scope="row"><?php _e('Pages are:', $this->localizationDomain); ?></th> 
+                            <th width="33%" scope="row"><?php _e('Where detection should occur:', $this->localizationDomain); ?></th> 
                             <td>
                             <select name="hits_ie6_pngfix_pagesAreCached" id="hits_ie6_pngfix_pagesAreCached" style="width:200px;">
-								<option value="false"<?php if (strcmp($this->options['hits_ie6_pngfix_pagesAreCached'],'false')==0) { echo ' selected="selected"';} ?>><?php _e('not cached', $this->localizationDomain);?></option>
-								<option value="true"<?php if (strcmp($this->options['hits_ie6_pngfix_pagesAreCached'],'true')==0) { echo ' selected="selected"';} ?>><?php _e('cached', $this->localizationDomain);?></option>
-							</select>
+								<option value="false"<?php if (strcmp($this->options['hits_ie6_pngfix_pagesAreCached'],'false')==0) { echo ' selected="selected"';} ?>><?php _e('Server Side', $this->localizationDomain);?></option>
+								<option value="true"<?php if (strcmp($this->options['hits_ie6_pngfix_pagesAreCached'],'true')==0) { echo ' selected="selected"';} ?>><?php _e('Client Side', $this->localizationDomain);?></option>
+							</select><br /><?php _e('Note: Choose Client Side if you use page caching!.', $this->localizationDomain);?>
                         </td> 
                         </tr>
                         <tr>
