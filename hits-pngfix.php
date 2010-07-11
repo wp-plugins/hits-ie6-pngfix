@@ -1,7 +1,7 @@
 <?php
 /*
 	Plugin Name: HITS- IE6 PNGFix
-	Version: 3.1.2
+	Version: 3.1.3
 	Author: Adam Erstelle
 	Author URI: http://www.homeitsolutions.ca
 	Plugin URI: http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix
@@ -48,7 +48,7 @@ if (!class_exists('hits_ie6_pngfix')) {
         */
         var $optionsName = 'hits_ie6_pngfix_options';
         var $wp_version;
-		var $version = '3.1.2';
+		var $version = '3.1.3';
         
         /**
         * @var string $localizationDomain Domain used for localization
@@ -118,18 +118,36 @@ if (!class_exists('hits_ie6_pngfix')) {
 		{
             static $this_plugin;
             if (!$this_plugin) $this_plugin = plugin_basename(__FILE__);
-
-            if ($file == $this_plugin){
+			
+            if ($file == $this_plugin)
+			{
                 $current = $this->wp_version < 28 ? get_option('update_plugins') : get_transient('update_plugins');
-                if (!isset($current->response[$file])) return false;
+				$someValue = $current->response[$file];
+                if (!isset($someValue)) 
+					return false;
 
                 $columns = $this->wp_version < 28 ? 5 : 3;
+			
+				if($this->options['hits_ie6_debug']=='true')
+				{
+					echo "\n<!-- HITS IE6 PNG Fix Debug For Displaying Update Box -->";
+				}
                 $url = "http://svn.wp-plugins.org/hits-ie6-pngfix/trunk/updateText.txt";
                 $update = wp_remote_fopen($url);
-                if ($update != "") {
-                    echo '<td colspan="'.$columns.'" class="hits-plugin-update"><div class="hits-plugin-update-message">';
-                    echo $update;
-                    echo '</div></td>';
+                if ($update != "") 
+				{
+					$updateForVersion = trim(substr($update,79,6));
+					if($this->options['hits_ie6_debug']=='true')
+					{
+						echo "\n<!-- updateForVersion=$updateForVersion -->\n";	
+						echo "\n<!-- this->version=$this->version -->\n";	
+					}
+					if(strcmp($this->version,$updateForVersion)<0)
+					{
+						echo '<td colspan="'.$columns.'" class="hits-plugin-update"><div class="hits-plugin-update-message">';
+						echo $update;
+						echo '</div></td>';
+					}
                 }
             }
         }
@@ -427,9 +445,9 @@ if (!class_exists('hits_ie6_pngfix')) {
                             <th width="33%" scope="row"><?php _e('Where detection should occur:', $this->localizationDomain); ?></th> 
                             <td>
                             <select name="hits_ie6_pngfix_pagesAreCached" id="hits_ie6_pngfix_pagesAreCached" style="width:200px;">
-								<option value="false"<?php if (strcmp($this->options['hits_ie6_pngfix_pagesAreCached'],'false')==0) { echo ' selected="selected"';} ?>><?php _e('Server Side', $this->localizationDomain);?></option>
-								<option value="true"<?php if (strcmp($this->options['hits_ie6_pngfix_pagesAreCached'],'true')==0) { echo ' selected="selected"';} ?>><?php _e('Client Side', $this->localizationDomain);?></option>
-							</select><br /><?php _e('Note: Choose Client Side if you use page caching!.', $this->localizationDomain);?>
+								<option value="false"<?php if (strcmp($this->options['hits_ie6_pngfix_pagesAreCached'],'false')==0) { echo ' selected="selected"';} ?>><?php _e('Pages are not cached (default)', $this->localizationDomain);?></option>
+								<option value="true"<?php if (strcmp($this->options['hits_ie6_pngfix_pagesAreCached'],'true')==0) { echo ' selected="selected"';} ?>><?php _e('Pages are cached', $this->localizationDomain);?></option>
+							</select><br /><?php _e('Note: Pages being cached rely on browser conditional comments, and can interfere with your theme.', $this->localizationDomain);?>
                         </td> 
                         </tr>
                         <tr>

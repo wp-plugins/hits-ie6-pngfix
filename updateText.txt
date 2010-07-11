@@ -1,1 +1,1 @@
-<span style="color: red; font-variant: small-caps; font-weight: bold;">Version 3.1.2 Changes: </span>Version Changes box does not appear for a previous version.
+<span style="color: red; font-variant: small-caps; font-weight: bold;">Version 3.1.3 Changes: </span>Extra check to ensure this box doesn't appear if plugin is current.
