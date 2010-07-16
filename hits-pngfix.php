@@ -1,11 +1,11 @@
 <?php
 /*
 	Plugin Name: HITS- IE6 PNGFix
-	Version: 3.1.3
+	Version: 3.1.4
 	Author: Adam Erstelle
 	Author URI: http://www.homeitsolutions.ca
 	Plugin URI: http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix
-	Description: Adds IE6 Compatability for PNG transparency, using 1 of 5 configured approaches
+	Description: Adds IE6 Compatability for PNG transparency, using 1 of 5 configured approaches either server side or client side
 	Text Domain: hits-ie6-pngfix
 	
 	PLEASE NOTE: If you make any modifications to this plugin file directly, please contact me so that
@@ -48,7 +48,7 @@ if (!class_exists('hits_ie6_pngfix')) {
         */
         var $optionsName = 'hits_ie6_pngfix_options';
         var $wp_version;
-		var $version = '3.1.3';
+		var $version = '3.1.4';
         
         /**
         * @var string $localizationDomain Domain used for localization
@@ -182,7 +182,7 @@ if (!class_exists('hits_ie6_pngfix')) {
 				echo "\n<!-- The browser itself will determine if IE6 code will be used -->";
 				echo "\n<!--[if lte IE 6]>";
 				$this->write_ie6_fix_nodes($fixMethod);
-				echo "\n<![endif] -->";
+				echo "\n<![endif]-->";
 			}
 			
 			echo "\n<!--  End  - HITS-IE6 PNGFix -->\n";
