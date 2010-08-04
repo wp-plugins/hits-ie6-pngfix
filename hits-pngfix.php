@@ -460,7 +460,7 @@ if (!class_exists('hits_ie6_pngfix')) {
                             </td>
                         </tr>
                         <tr>
-                            <th colspan=2><input type="submit" name="hits_ie6_pngfix_save" value="Save" /></th>
+                            <th colspan=2><input type="submit" name="hits_ie6_pngfix_save" value="<?php _e('Save',$this->localizationDomain);?>" /></th>
                         </tr>
                     </table>
                     
