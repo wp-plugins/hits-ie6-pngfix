@@ -1,1 +1,1 @@
-<span style="color: red; font-variant: small-caps; font-weight: bold;">Version 3.1.4 Changes: </span>Fixed a problem with IE7 and 8 client side detection code.
+<span style="color: red; font-variant: small-caps; font-weight: bold;">Version 3.1.5 Changes: </span>Added Portuguese Brazilian translation, updated translation template
