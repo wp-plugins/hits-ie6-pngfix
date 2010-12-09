@@ -1,7 +1,7 @@
 <?php
 /*
 	Plugin Name: HITS- IE6 PNGFix
-	Version: 3.1.5
+	Version: 3.2
 	Author: Adam Erstelle
 	Author URI: http://www.homeitsolutions.ca
 	Plugin URI: http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix
@@ -48,7 +48,7 @@ if (!class_exists('hits_ie6_pngfix')) {
         */
         var $optionsName = 'hits_ie6_pngfix_options';
         var $wp_version;
-		var $version = '3.1.5';
+		var $version = '3.2';
         
         /**
         * @var string $localizationDomain Domain used for localization
@@ -202,12 +202,11 @@ if (!class_exists('hits_ie6_pngfix')) {
 			}
 			else if (strcmp($fixMethod,'UPNGFIX')==0)
 			{
-				echo "\n<script type='text/javascript' src='". $this->thispluginurl."UPNGFIX/unitpngfix.js'></script>";
-				echo "\n<script type='text/javascript'>clear = '". $this->thispluginurl."UPNGFIX/clear.gif';</script>";
+				echo "\n<script type='text/javascript' src='". $this->thispluginurl."UPNGFIX/unitpngfix.js.php'></script>";
 			}
 			else if (strcmp($fixMethod,'SUPERSLEIGHT')==0)
 			{
-				echo "\n<script type='text/javascript' src='". $this->thispluginurl."supersleight/supersleight-min.js'></script>";
+				echo "\n<script type='text/javascript' src='". $this->thispluginurl."supersleight/supersleight-min.js.php'></script>";
 			}
 			else if (strcmp($fixMethod,'DD_BELATED')==0)
 			{
@@ -262,10 +261,11 @@ if (!class_exists('hits_ie6_pngfix')) {
 			{//default options
                 $theOptions = array('hits_ie6_pngfix_method'=>'THM1', //Added V2.0
 									'hits_ie6_pngfix_THM_CSSSelector'=>'img, div', //Added V2.1
-									'hits_ie6_pngfix_THM_image_path'=>'Initiated',//Added V2.2
+									//'hits_ie6_pngfix_THM_image_path'=>'Initiated',//Added V2.2  Removed in V3.2
 									'hits_ie6_pngfix_version'=>$this->version, //Added V2.3
 									'hits_ie6_debug'=>"false", //Added V3.0
-									'hits_ie6_pngfix_pagesAreCached'=>'false' //Added V3.1
+									'hits_ie6_pngfix_pagesAreCached'=>'false', //Added V3.1
+									'hits_ie6_pngfix_image_path'=>'Initiated'//Added V3.2
 									);
                 update_option($this->optionsName, $theOptions);
             }
@@ -285,19 +285,7 @@ if (!class_exists('hits_ie6_pngfix')) {
 						$this->options['hits_ie6_pngfix_THM_CSSSelector'] = 'img,div';
 					else if(strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
 						$this->options['hits_ie6_pngfix_THM_CSSSelector'] = 'img, div, a, input';
-				}
-				if(!$this->options['hits_ie6_pngfix_THM_image_path'] || (strcmp($this->options['hits_ie6_pngfix_THM_image_path'],'Initiated')==0))
-				{
-					if(strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0)
-						$this->options['hits_ie6_pngfix_THM_image_path'] = $this->thispluginurl."THM1/blank.gif";
-					else if(strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
-						$this->options['hits_ie6_pngfix_THM_image_path'] = $this->thispluginurl."THM2/blank.gif";
-					else
-						$this->options['hits_ie6_pngfix_THM_image_path']='InitiatedV2.9';
-					
-					$this->persist_optionsFile();
-				}
-				
+				}				
 				//upgrading from version 2.2
 				
 				//set the version and update the database.
@@ -314,6 +302,29 @@ if (!class_exists('hits_ie6_pngfix')) {
 				{
 					$this->options['hits_ie6_pngfix_pagesAreCached']='false';	
 				}
+				
+				//upgrading to V3.2
+				if($this->options['hits_ie6_pngfix_THM_image_path'])
+				{
+					//remove the old options	
+					unset($this->options['hits_ie6_pngfix_THM_image_path']);
+				}
+				if(!$this->options['hits_ie6_pngfix_image_path'] || (strcmp($this->options['hits_ie6_pngfix_image_path'],'Initiated')==0))
+				{
+					/*
+					if(strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0)
+						$this->options['hits_ie6_pngfix_image_path'] = $this->thispluginurl."THM1/blank.gif";
+					else if(strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
+						$this->options['hits_ie6_pngfix_image_path'] = $this->thispluginurl."THM2/blank.gif";
+					else if(strcmp($this->options['hits_ie6_pngfix_method'],'UPNGFIX')==0)
+						$this->options['hits_ie6_pngfix_image_path'] = $this->thispluginurl."UPNGFIX/clear.gif";
+					else if(strcmp($this->options['hits_ie6_pngfix_method'],'SUPERSLEIGHT')==0)
+						$this->options['hits_ie6_pngfix_image_path'] = $this->thispluginurl."supersleight/x.gif";
+					else
+						$this->options['hits_ie6_pngfix_image_path']='InitiatedV3.2';
+					*/
+					$this->persist_optionsFile();
+				}
 			}
 			
 			//if missing options found, update them.
@@ -328,11 +339,17 @@ if (!class_exists('hits_ie6_pngfix')) {
         * @desc Saves the admin options to the database.
         */
         function saveAdminOptions(){
-			$this->options['hits_ie6_pngfix_THM_image_path']="";
-			if(strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0)
-				$this->options['hits_ie6_pngfix_THM_image_path'] = $this->thispluginurl."THM1/blank.gif";
+			$this->options['hits_ie6_pngfix_image_path']=$this->thispluginurl."clear.gif";
+			/*if(strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0)
+				$this->options['hits_ie6_pngfix_image_path'] = $this->thispluginurl."THM1/blank.gif";
 			else if(strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
-				$this->options['hits_ie6_pngfix_THM_image_path'] = $this->thispluginurl."THM2/blank.gif";
+				$this->options['hits_ie6_pngfix_image_path'] = $this->thispluginurl."THM2/blank.gif";
+			else if(strcmp($this->options['hits_ie6_pngfix_method'],'UPNGFIX')==0)
+				$this->options['hits_ie6_pngfix_image_path'] = $this->thispluginurl."UPNGFIX/clear.gif";
+			else if(strcmp($this->options['hits_ie6_pngfix_method'],'SUPERSLEIGHT')==0)
+				$this->options['hits_ie6_pngfix_image_path'] = $this->thispluginurl."supersleight/x.gif";
+				*/
+			
 			//save image path to a file so that the php referenced by CSS (outside of wordpress context)
 			//can get the location of the file.
 			$this->persist_optionsFile();
@@ -347,7 +364,7 @@ if (!class_exists('hits_ie6_pngfix')) {
 			if($this->is__writable($propFile))
 			{
 				$propFileHandle = @fopen($propFile, 'w') or die("can't open file");
-				fwrite($propFileHandle,$this->options['hits_ie6_pngfix_THM_image_path']);
+				fwrite($propFileHandle,$this->options['hits_ie6_pngfix_image_path']);
 				fclose($propFileHandle);
 			}
 			else

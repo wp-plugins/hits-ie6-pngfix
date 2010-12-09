@@ -50,6 +50,11 @@ Unfortunately there isn't a single best PNG Fix method, otherwise everyone would
 
 == Changelog ==
 
+= 3.2 =
+* Fixed Supersleight method as the transparent gif did not have proper path to plugin
+* Simplified how the clear image is being used, reducing files in plugin
+* [Updated December 8, 2010]
+
 = 3.1.5 =
 * Added Portuguese Brazilian translation thanks to Gervásio A.
 * Updated the Translation Template file hits-ie6-pngfix.pot to have all text and updated code line numbers for easier searching

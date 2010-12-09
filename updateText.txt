@@ -1,1 +1,1 @@
-<span style="color: red; font-variant: small-caps; font-weight: bold;">Version 3.1.5 Changes: </span>Added Portuguese Brazilian translation, updated translation template
+<span style="color: red; font-variant: small-caps; font-weight: bold;">Version 3.2 Changes: </span>Fixed supersleight, reduced number of files in plugin
