@@ -1,7 +1,7 @@
 <?php
 /*
 	Plugin Name: HITS- IE6 PNGFix
-	Version: 3.2.1
+	Version: 3.3.1
 	Author: Adam Erstelle
 	Author URI: http://www.homeitsolutions.ca
 	Plugin URI: http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix
@@ -48,7 +48,7 @@ if (!class_exists('hits_ie6_pngfix')) {
         */
         var $optionsName = 'hits_ie6_pngfix_options';
         var $wp_version;
-		var $version = '3.2.1';
+		var $version = '3.3.1';
         
         /**
         * @var string $localizationDomain Domain used for localization
@@ -264,10 +264,11 @@ if (!class_exists('hits_ie6_pngfix')) {
 									//'hits_ie6_pngfix_THM_image_path'=>'Initiated',//Added V2.2  Removed in V3.2
 									'hits_ie6_pngfix_version'=>$this->version, //Added V2.3
 									'hits_ie6_debug'=>"false", //Added V3.0
-									'hits_ie6_pngfix_pagesAreCached'=>'false', //Added V3.1
-									'hits_ie6_pngfix_image_path'=>'Initiated'//Added V3.2
+									'hits_ie6_pngfix_pagesAreCached'=>'false' //Added V3.1
+									//'hits_ie6_pngfix_image_path'=>'Initiated'//Added V3.2 Removed in V3.3
 									);
                 update_option($this->optionsName, $theOptions);
+				$this->persist_optionsFile();
             }
             $this->options = $theOptions;
             
@@ -309,20 +310,10 @@ if (!class_exists('hits_ie6_pngfix')) {
 					//remove the old options	
 					unset($this->options['hits_ie6_pngfix_THM_image_path']);
 				}
-				if(!$this->options['hits_ie6_pngfix_image_path'] || (strcmp($this->options['hits_ie6_pngfix_image_path'],'Initiated')==0))
+				if($this->options['hits_ie6_pngfix_image_path'])
 				{
-					/*
-					if(strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0)
-						$this->options['hits_ie6_pngfix_image_path'] = $this->thispluginurl."THM1/blank.gif";
-					else if(strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
-						$this->options['hits_ie6_pngfix_image_path'] = $this->thispluginurl."THM2/blank.gif";
-					else if(strcmp($this->options['hits_ie6_pngfix_method'],'UPNGFIX')==0)
-						$this->options['hits_ie6_pngfix_image_path'] = $this->thispluginurl."UPNGFIX/clear.gif";
-					else if(strcmp($this->options['hits_ie6_pngfix_method'],'SUPERSLEIGHT')==0)
-						$this->options['hits_ie6_pngfix_image_path'] = $this->thispluginurl."supersleight/x.gif";
-					else
-						$this->options['hits_ie6_pngfix_image_path']='InitiatedV3.2';
-					*/
+					//remove old option
+					unset($this->options['hits_ie6_pngfix_image_path']);
 					$this->persist_optionsFile();
 				}
 			}
@@ -339,21 +330,6 @@ if (!class_exists('hits_ie6_pngfix')) {
         * @desc Saves the admin options to the database.
         */
         function saveAdminOptions(){
-			$this->options['hits_ie6_pngfix_image_path']=$this->thispluginurl."clear.gif";
-			/*if(strcmp($this->options['hits_ie6_pngfix_method'],'THM1')==0)
-				$this->options['hits_ie6_pngfix_image_path'] = $this->thispluginurl."THM1/blank.gif";
-			else if(strcmp($this->options['hits_ie6_pngfix_method'],'THM2')==0)
-				$this->options['hits_ie6_pngfix_image_path'] = $this->thispluginurl."THM2/blank.gif";
-			else if(strcmp($this->options['hits_ie6_pngfix_method'],'UPNGFIX')==0)
-				$this->options['hits_ie6_pngfix_image_path'] = $this->thispluginurl."UPNGFIX/clear.gif";
-			else if(strcmp($this->options['hits_ie6_pngfix_method'],'SUPERSLEIGHT')==0)
-				$this->options['hits_ie6_pngfix_image_path'] = $this->thispluginurl."supersleight/x.gif";
-				*/
-			
-			//save image path to a file so that the php referenced by CSS (outside of wordpress context)
-			//can get the location of the file.
-			$this->persist_optionsFile();
-
 			//save options to database
 			return update_option($this->optionsName, $this->options);
         }
@@ -364,7 +340,7 @@ if (!class_exists('hits_ie6_pngfix')) {
 			if($this->is__writable($propFile))
 			{
 				$propFileHandle = @fopen($propFile, 'w') or die("can't open file");
-				fwrite($propFileHandle,$this->options['hits_ie6_pngfix_image_path']);
+				fwrite($propFileHandle,$this->thispluginurl."clear.gif");
 				fclose($propFileHandle);
 			}
 			else

@@ -1,1 +1,1 @@
-<span style="color: red; font-variant: small-caps; font-weight: bold;">Version 3.2.1 Changes: </span>Fixed supersleight, reduced number of files in plugin
+<span style="color: red; font-variant: small-caps; font-weight: bold;">Version 3.3.1 Changes: </span>Fixed red x when plugin first installed without settings saved

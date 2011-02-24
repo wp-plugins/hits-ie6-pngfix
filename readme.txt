@@ -50,6 +50,10 @@ Unfortunately there isn't a single best PNG Fix method, otherwise everyone would
 
 == Changelog ==
 
+= 3.3.1 =
+* Location of clear.gif was not being set when plugin is installed, only when settings saved
+* [Updated February 23, 2011]
+
 = 3.2.1 =
 * Fixed Supersleight method as the transparent gif did not have proper path to plugin
 * Simplified how the clear image is being used, reducing files in plugin
