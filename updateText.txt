@@ -1,1 +1,1 @@
-<span style="color: red; font-variant: small-caps; font-weight: bold;">Version 3.3.1 Changes: </span>Fixed red x when plugin first installed without settings saved
+<span style="color: red; font-variant: small-caps; font-weight: bold;">Version 3.3.2 Changes: </span>Red X should not appear, optimized wordpress hooks, improved plugin code documentation

@@ -1,10 +1,10 @@
 <?php
 /*
 	Plugin Name: HITS- IE6 PNGFix
-	Version: 3.3.1
+	Version: 3.3.2
 	Author: Adam Erstelle
-	Author URI: http://www.homeitsolutions.ca
-	Plugin URI: http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix
+	Author URI: http://www.itegritysolutions.ca/
+	Plugin URI: http://www.itegritysolutions.ca/community/wordpress/ie6-png-fix
 	Description: Adds IE6 Compatability for PNG transparency, using 1 of 5 configured approaches either server side or client side
 	Text Domain: hits-ie6-pngfix
 	
@@ -42,13 +42,13 @@ if ( ! defined( 'WP_PLUGIN_DIR' ) )
 
 if (!class_exists('hits_ie6_pngfix')) {
     class hits_ie6_pngfix {
-        //This is where the class variables go, don't forget to use @var to tell what they're for
         /**
         * @var string The options string name for this plugin
         */
         var $optionsName = 'hits_ie6_pngfix_options';
         var $wp_version;
-		var $version = '3.3.1';
+		var $version = '3.3.2';
+		var $overrideIE6Check=false;//for debug purposes only
         
         /**
         * @var string $localizationDomain Domain used for localization
@@ -69,7 +69,6 @@ if (!class_exists('hits_ie6_pngfix')) {
         */
         var $options = array();
         
-        //Class Functions
         /**
         * PHP 4 Compatible Constructor
         */
@@ -97,23 +96,33 @@ if (!class_exists('hits_ie6_pngfix')) {
             $this->actions_filters();
         }
 		
-		/*
+		/**
 		 * Centralized place for adding all actions and filters for the plugin into wordpress
 		*/
 		function actions_filters()
 		{
-			add_action("admin_menu", array(&$this,"admin_menu_link"));
-			add_action('wp_head', array(&$this,'wp_head'));
-			add_action('admin_head', array(&$this, 'admin_head'));
-			
-			add_action('after_plugin_row', array(&$this,'plugin_check_version'), 10, 2);
+			if(is_admin()){
+				add_action('admin_menu', array(&$this,'admin_menu_link'));
+				add_action('admin_head', array(&$this, 'admin_head'));			
+				add_action('after_plugin_row', array(&$this,'plugin_check_version'), 10, 2);
+			}
+			else
+				add_action('wp_head', array(&$this,'wp_head'));
 		}
 		
+		/**
+		 * Adds administrative stylesheet
+		 */
 		function admin_head()
 		{
             echo('<link rel="stylesheet" href="'.$this->thispluginurl.'css/admin.css" type="text/css" media="screen" />');			
 		}
 		
+        /**
+         * Checks to see if plugin is latest version, and will display text describing what has been updated since last version
+         * @param $file File being tested in wordpress hook
+         * @param $plugin_data Unknown, but not used
+         */
         function plugin_check_version($file, $plugin_data) 
 		{
             static $this_plugin;
@@ -152,7 +161,7 @@ if (!class_exists('hits_ie6_pngfix')) {
             }
         }
 
-        /*
+        /**
 		 * Writes the IE6 fix code if IE6 has been detected as the user's browser
 		*/
         function wp_head()
@@ -169,7 +178,7 @@ if (!class_exists('hits_ie6_pngfix')) {
 			}
 			if($pagesAreCached=='false')
 			{
-				if($this->isIE6())
+				if($this->isIE6() || $this->overrideIE6Check)
 				{
 					echo "\n<!-- IE6 has been detected as the users browser version by the server -->";
 					$this->write_ie6_fix_nodes($fixMethod);
@@ -189,6 +198,10 @@ if (!class_exists('hits_ie6_pngfix')) {
 			echo "\n";
 		}
 		
+		/**
+		 * Outputs the fix to the browser's head for implementing the IE6 PNG Fix
+		 * @param String $fixMethod
+		 */
 		function write_ie6_fix_nodes($fixMethod)
 		{
 			if (strcmp($fixMethod,'THM1')==0)
@@ -215,7 +228,10 @@ if (!class_exists('hits_ie6_pngfix')) {
 			}
 		}
         
-		// IE6 Check
+		/**
+		 * PHP IE6 detection code.
+		 * @return boolean Whether or not PHP has detected the browser is IE6
+		 */
 		function isIE6()
 		{
 			$browser = 'mozilla';
@@ -256,7 +272,6 @@ if (!class_exists('hits_ie6_pngfix')) {
         * @return array
         */
         function getOptions() {
-            //Don't forget to set up the default options
             if (!$theOptions = get_option($this->optionsName)) 
 			{//default options
                 $theOptions = array('hits_ie6_pngfix_method'=>'THM1', //Added V2.0
@@ -321,11 +336,8 @@ if (!class_exists('hits_ie6_pngfix')) {
 			//if missing options found, update them.
 			if($missingOptions==true)
 				$this->saveAdminOptions();
-			
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            //There is no return here, because you should use the $this->options variable!!!
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         }
+        
         /**
         * @desc Saves the admin options to the database.
         */
@@ -334,6 +346,9 @@ if (!class_exists('hits_ie6_pngfix')) {
 			return update_option($this->optionsName, $this->options);
         }
 		
+		/**
+		 * Saves the path to the location of clear.gif to a properties file for use inside the fixes.
+		 */
 		function persist_optionsFile()
 		{
 			$propFile = $this->thispluginpath.'hits-pngfix.properties';
@@ -350,7 +365,12 @@ if (!class_exists('hits_ie6_pngfix')) {
 			}
 		}
 		
-		//following code taken from http://us.php.net/manual/en/function.is-writable.php
+		/**
+		 * Determines if a file is writeable by the web server
+		 * following code taken from http://us.php.net/manual/en/function.is-writable.php
+		 * @param unknown_type $path
+		 * @return boolean
+		 */
 		function is__writable($path) {
 		//will work in despite of Windows ACLs bug
 		//NOTE: use a trailing slash for folders!!!
@@ -372,9 +392,8 @@ if (!class_exists('hits_ie6_pngfix')) {
 			return true;
 		}
 
-        
         /**
-        * @desc Adds the options subpanel
+        * Adds the options subpanel
         */
         function admin_menu_link() {
             //If you change this from add_options_page, MAKE SURE you change the filter_plugin_actions function (below) to
@@ -384,7 +403,7 @@ if (!class_exists('hits_ie6_pngfix')) {
         }
         
         /**
-        * @desc Adds the Settings link to the plugin activate/deactivate page
+        * Adds the Settings link to the plugin activate/deactivate page
         */
         function filter_plugin_actions($links, $file) {
            //If your plugin is under a different top-level menu than Settiongs (IE - you changed the function above to something other than add_options_page)
@@ -414,7 +433,7 @@ if (!class_exists('hits_ie6_pngfix')) {
                 <h2>HITS- IE6 PNG Fix</h2>
                 <form method="post" id="hits_ie6_pngfix_options">
                 <?php wp_nonce_field('hits_ie6_pngfix-update-options');?>
-                <p><?php _e('This plugin brought to you for free by ', $this->localizationDomain);?><a href="http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix">Home I.T. Solutions</a>.</p>
+                <p><?php _e('This plugin brought to you for free by ', $this->localizationDomain);?><a href="http://www.itegritysolutions.ca/community/wordpress/ie6-png-fix" target="_blank" >ITegrity Solutions</a>.</p>
                 <p><?php _e('I take no credit for the great effort authors have gone into making each method of getting IE6 PNG compatability to work. I just did the work to merge them all into a single wordpress plugin.', $this->localizationDomain);?></p>
                     <table width="100%" cellspacing="2" cellpadding="5" class="form-table"> 
                         <tr valign="top"> 
@@ -464,6 +483,7 @@ if (!class_exists('hits_ie6_pngfix')) {
                     <p><?php _e('The SuperSleight apprach was taken from', $this->localizationDomain);?> <a href="http://allinthehead.com/retro/338/supersleight-jquery-plugin">Drew McLellan</a></p>
                 	<p><?php _e('The DD_belatedPNG approach was taken from', $this->localizationDomain);?> <a href="http://dillerdesign.com/experiment/DD_belatedPNG/">DillerDesign</a></p>
                   </form>
+                  </div>
                 <?php
         }
   } //End Class
