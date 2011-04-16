@@ -1,7 +1,7 @@
 <?php
 /*
 	Plugin Name: HITS- IE6 PNGFix
-	Version: 3.3.2
+	Version: 3.4
 	Author: Adam Erstelle
 	Author URI: http://www.itegritysolutions.ca/
 	Plugin URI: http://www.itegritysolutions.ca/community/wordpress/ie6-png-fix
@@ -47,7 +47,7 @@ if (!class_exists('hits_ie6_pngfix')) {
         */
         var $optionsName = 'hits_ie6_pngfix_options';
         var $wp_version;
-		var $version = '3.3.2';
+		var $version = '3.4';
 		var $overrideIE6Check=false;//for debug purposes only
         
         /**
@@ -103,8 +103,7 @@ if (!class_exists('hits_ie6_pngfix')) {
 		{
 			if(is_admin()){
 				add_action('admin_menu', array(&$this,'admin_menu_link'));
-				add_action('admin_head', array(&$this, 'admin_head'));			
-				add_action('after_plugin_row', array(&$this,'plugin_check_version'), 10, 2);
+				add_action('admin_head', array(&$this, 'admin_head'));
 			}
 			else
 				add_action('wp_head', array(&$this,'wp_head'));
@@ -118,49 +117,6 @@ if (!class_exists('hits_ie6_pngfix')) {
             echo('<link rel="stylesheet" href="'.$this->thispluginurl.'css/admin.css" type="text/css" media="screen" />');			
 		}
 		
-        /**
-         * Checks to see if plugin is latest version, and will display text describing what has been updated since last version
-         * @param $file File being tested in wordpress hook
-         * @param $plugin_data Unknown, but not used
-         */
-        function plugin_check_version($file, $plugin_data) 
-		{
-            static $this_plugin;
-            if (!$this_plugin) $this_plugin = plugin_basename(__FILE__);
-			
-            if ($file == $this_plugin)
-			{
-                $current = $this->wp_version < 28 ? get_option('update_plugins') : get_transient('update_plugins');
-				$someValue = $current->response[$file];
-                if (!isset($someValue)) 
-					return false;
-
-                $columns = $this->wp_version < 28 ? 5 : 3;
-			
-				if($this->options['hits_ie6_debug']=='true')
-				{
-					echo "\n<!-- HITS IE6 PNG Fix Debug For Displaying Update Box -->";
-				}
-                $url = "http://svn.wp-plugins.org/hits-ie6-pngfix/trunk/updateText.txt";
-                $update = wp_remote_fopen($url);
-                if ($update != "") 
-				{
-					$updateForVersion = trim(substr($update,79,6));
-					if($this->options['hits_ie6_debug']=='true')
-					{
-						echo "\n<!-- updateForVersion=$updateForVersion -->\n";	
-						echo "\n<!-- this->version=$this->version -->\n";	
-					}
-					if(strcmp($this->version,$updateForVersion)<0)
-					{
-						echo '<td colspan="'.$columns.'" class="hits-plugin-update"><div class="hits-plugin-update-message">';
-						echo $update;
-						echo '</div></td>';
-					}
-                }
-            }
-        }
-
         /**
 		 * Writes the IE6 fix code if IE6 has been detected as the user's browser
 		*/

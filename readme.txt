@@ -48,7 +48,16 @@ Unfortunately there isn't a single best PNG Fix method, otherwise everyone would
 1. This is the settings page. Pretty simple.
 2. These are the various options you can select. After clicking save you are done!
 
+== Upgrade Notice ==
+
+= 3.4 =
+* Removed custom Upgrade Text code, optimized performance
+
 == Changelog ==
+
+= 3.4 =
+* Removed custom Upgrade Text code. Will implement through readme
+* [Updated April 16, 2011]
 
 = 3.3.2 =
 * Improved in-code documentation
