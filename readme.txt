@@ -1,7 +1,7 @@
 ﻿=== HITS- IE6 PNGFix ===
 Contributors: wpgwiggum
-Donate Link:  http://www.homeitsolutions.ca/websites/wordpress-plugins/ie6-png-fix 
 Tags: images, plugin, formatting, image, style, compatability, transparency
+Donate Link: http://www.itegritysolutions.ca/community/wordpress/ie6-png-fix
 Requires at least: 2.7
 Tested up to: 3.1
 Stable tag: 3.3.1
@@ -49,6 +49,12 @@ Unfortunately there isn't a single best PNG Fix method, otherwise everyone would
 2. These are the various options you can select. After clicking save you are done!
 
 == Changelog ==
+
+= 3.3.2 =
+* Improved in-code documentation
+* Updated readme document
+* Optimized hooks into wordpress
+* [Updated April 15, 2011]
 
 = 3.3.1 =
 * Location of clear.gif was not being set when plugin is installed, only when settings saved
