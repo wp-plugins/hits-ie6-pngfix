@@ -396,7 +396,7 @@ if (!class_exists('hits_ie6_pngfix')) {
         * Adds settings/options page
         */
         function admin_options_page() { 
-            require_once($this->pluginDIR .'/adminPage.php');
+            require_once($this->pluginDIR .'adminPage.php');
         }
   } //End Class
 } //End if class exists statement
