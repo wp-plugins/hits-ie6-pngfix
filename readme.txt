@@ -50,10 +50,19 @@ Unfortunately there isn't a single best PNG Fix method, otherwise everyone would
 
 == Upgrade Notice ==
 
+= 3.5 =
+* Content over SSL fixed, further cleaning of code
+
 = 3.4 =
 * Removed custom Upgrade Text code, optimized performance
 
 == Changelog ==
+
+= 3.5 =
+* Split the admin page from main php file to clean up code
+* Fixed 3rd argument of add_options_page call into wordpress
+* Checks if it should deliver .js and .css in secured fashion
+* [Updated May 18, 2011]
 
 = 3.4 =
 * Removed custom Upgrade Text code. Will implement through readme
