@@ -62,7 +62,7 @@ Unfortunately there isn't a single best PNG Fix method, otherwise everyone would
 * Split the admin page from main php file to clean up code
 * Fixed 3rd argument of add_options_page call into wordpress
 * Delivers css and js with protocol relative URLs
-* [Updated May 18, 2011]
+* [Updated July 6, 2011]
 
 = 3.4 =
 * Removed custom Upgrade Text code. Will implement through readme
