@@ -1,6 +1,6 @@
 <?php
 header('Content-type: text/javascript');
-$myFile = '../hits-pngfix.properties';
+$myFile = '../hits-pngfix2.properties';
 $theData = '';
 if(is_readable($myFile))
 {

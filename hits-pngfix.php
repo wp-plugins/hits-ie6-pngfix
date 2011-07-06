@@ -26,20 +26,6 @@
 	along with this program; if not, write to the Free Software
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-
-/**
-* Guess the wp-content and plugin urls/paths
-*/
-// Pre-WP-2.6 compatibility
-if ( ! defined( 'WP_CONTENT_URL' ) )
-      define( 'WP_CONTENT_URL', get_option( 'siteurl' ) . '/wp-content' );
-if ( ! defined( 'WP_CONTENT_DIR' ) )
-      define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
-if ( ! defined( 'WP_PLUGIN_URL' ) )
-      define( 'WP_PLUGIN_URL', WP_CONTENT_URL. '/plugins' );
-if ( ! defined( 'WP_PLUGIN_DIR' ) )
-      define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugins' );
-
 if (!class_exists('hits_ie6_pngfix')) {
     class hits_ie6_pngfix {
         /**
@@ -47,8 +33,8 @@ if (!class_exists('hits_ie6_pngfix')) {
         */
         var $optionsName = 'hits_ie6_pngfix_options';
         var $wp_version;
-		var $version = '3.5';
-		var $overrideIE6Check=false;//for debug purposes only
+		var $version = '3.5.1';
+		var $overrideIE6Check=true;//for debug purposes only
         
         /**
         * @var string $localizationDomain Domain used for localization
@@ -59,6 +45,12 @@ if (!class_exists('hits_ie6_pngfix')) {
         * @var string $pluginurl The path to this plugin
         */ 
         var $thispluginurl = '';
+        
+        /**
+         * @var string $pluginProtocolRelativeUrl The protocol relative path to this plugin
+         */
+        var $thisProtocolRelativeUrl='';
+        
         /**
         * @var string $pluginurlpath The path to this plugin
         */
@@ -86,6 +78,8 @@ if (!class_exists('hits_ie6_pngfix')) {
             //"Constants" setup
             $this->thispluginurl = WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)).'/';
             $this->thispluginpath = WP_PLUGIN_DIR . '/' . dirname(plugin_basename(__FILE__)).'/';
+            $relativeUrl = str_replace('http://','//', $this->thispluginurl);
+            $this->thisProtocolRelativeUrl = $relativeUrl;
 			
 			global $wp_version;
             $this->wp_version = substr(str_replace('.', '', $wp_version), 0, 2);
@@ -114,10 +108,8 @@ if (!class_exists('hits_ie6_pngfix')) {
 		 */
 		function admin_head()
 		{
-			$cssUrl = $this->thispluginurl;
-			if(is_ssl())
-				$cssUrl = str_replace('http://','https://',$cssUrl);
-            echo('<link rel="stylesheet" href="'.$$cssUrl.'css/admin.css" type="text/css" media="screen" />');			
+			$cssUrl = $this->thisProtocolRelativeUrl;
+            echo('<link rel="stylesheet" href="'.$cssUrl.'css/admin.css" type="text/css" media="screen" />');			
 		}
 		
         /**
@@ -163,33 +155,27 @@ if (!class_exists('hits_ie6_pngfix')) {
 		 */
 		function write_ie6_fix_nodes($fixMethod)
 		{
-			$pluginUrl = $this->thispluginurl;
-			$secureInserted='';
-			if(is_ssl())
-			{
-				$pluginUrl = str_replace('http://','https://',$pluginUrl);
-				$secureInserted='-secure';
-			}
+			$pluginUrl = $this->thisProtocolRelativeUrl;
 			if (strcmp($fixMethod,'THM1')==0)
 			{
-				echo "\n<style type='text/css'>".$this->options['hits_ie6_pngfix_THM_CSSSelector']." { behavior: url(". $this->thispluginurl."THM1/iepngfix.php) }</style>";
+				echo "\n<style type='text/css'>".$this->options['hits_ie6_pngfix_THM_CSSSelector']." { behavior: url(". $pluginUrl."THM1/iepngfix.php) }</style>";
 			}
 			else if (strcmp($fixMethod,'THM2')==0)
 			{
-				echo "\n<style type='text/css'>".$this->options['hits_ie6_pngfix_THM_CSSSelector']." { behavior: url(". $this->thispluginurl."THM2/iepngfix.php) }</style>";
-				echo "\n<script type='text/javascript' src='". $this->thispluginurl."THM2/iepngfix_tilebg.js'></script>";
+				echo "\n<style type='text/css'>".$this->options['hits_ie6_pngfix_THM_CSSSelector']." { behavior: url(". $pluginUrl."THM2/iepngfix.php) }</style>";
+				echo "\n<script type='text/javascript' src='". $pluginUrl."THM2/iepngfix_tilebg.js'></script>";
 			}
 			else if (strcmp($fixMethod,'UPNGFIX')==0)
 			{
-				echo "\n<script type='text/javascript' src='". $this->thispluginurl."UPNGFIX/unitpngfix$secureInserted.js.php'></script>";
+				echo "\n<script type='text/javascript' src='". $pluginUrl."UPNGFIX/unitpngfix.js.php'></script>";
 			}
 			else if (strcmp($fixMethod,'SUPERSLEIGHT')==0)
 			{
-				echo "\n<script type='text/javascript' src='". $this->thispluginurl."supersleight/supersleight$secureInserted-min.js.php'></script>";
+				echo "\n<script type='text/javascript' src='". $pluginUrl."supersleight/supersleight-min.js.php'></script>";
 			}
 			else if (strcmp($fixMethod,'DD_BELATED')==0)
 			{
-				echo "\n<script type='text/javascript' src='". $this->thispluginurl."DD_belatedPNG/DD_belatedPNG_0.0.8a-min.js'></script>";
+				echo "\n<script type='text/javascript' src='". $pluginUrl."DD_belatedPNG/DD_belatedPNG_0.0.8a-min.js'></script>";
 				echo "\n<script type='text/javascript'>DD_belatedPNG.fix('".$this->options['hits_ie6_pngfix_THM_CSSSelector']."');</script>";
 			}
 		}
@@ -295,8 +281,8 @@ if (!class_exists('hits_ie6_pngfix')) {
 				{
 					//remove old option
 					unset($this->options['hits_ie6_pngfix_image_path']);
-					$this->persist_optionsFile();
 				}
+				$this->persist_optionsFile();
 			}
 			
 			//if missing options found, update them.
@@ -317,24 +303,12 @@ if (!class_exists('hits_ie6_pngfix')) {
 		 */
 		function persist_optionsFile()
 		{
-			$propFile = $this->thispluginpath.'hits-pngfix.properties';
+			$propFile = $this->thispluginpath.'hits-pngfix2.properties';
 			if($this->is__writable($propFile))
 			{
 				$propFileHandle = @fopen($propFile, 'w') or die("can't open file");
-				fwrite($propFileHandle,$this->thispluginurl."clear.gif");
+				fwrite($propFileHandle,$this->thisProtocolRelativeUrl."clear.gif");
 				fclose($propFileHandle);
-			}
-			else
-			{
-				if($this->options['hits_ie6_debug']=='true')
-					echo "<!-- DEBUG: Options file is not writeable -->";
-			}
-			$spropFile = $this->thispluginpath.'hits-pngfix-s.properties';
-			if($this->is__writable($spropFile))
-			{
-				$spropFileHandle = @fopen($propFile, 'w') or die("can't open file");
-				fwrite($spropFileHandle,str_replace('http://','https://',$this->thispluginurl)."clear.gif");
-				fclose($spropFileHandle);
 			}
 			else
 			{
