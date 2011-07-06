@@ -4,7 +4,7 @@ Tags: images, plugin, formatting, image, style, compatability, transparency
 Donate Link: http://www.itegritysolutions.ca/community/wordpress/ie6-png-fix
 Requires at least: 2.7
 Tested up to: 3.2
-Stable tag: 3.4
+Stable tag: 3.5.1
 
 Adds IE6 Compatability for PNG transparency, courtesy of multiple choices for PNG fixes available
 
