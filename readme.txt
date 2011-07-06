@@ -50,7 +50,7 @@ Unfortunately there isn't a single best PNG Fix method, otherwise everyone would
 
 == Upgrade Notice ==
 
-= 3.5 =
+= 3.5.1 =
 * Content over SSL fixed, further cleaning of code
 
 = 3.4 =
@@ -58,10 +58,10 @@ Unfortunately there isn't a single best PNG Fix method, otherwise everyone would
 
 == Changelog ==
 
-= 3.5 =
+= 3.5.1 =
 * Split the admin page from main php file to clean up code
 * Fixed 3rd argument of add_options_page call into wordpress
-* Checks if it should deliver .js and .css in secured fashion
+* Delivers css and js with protocol relative URLs
 * [Updated May 18, 2011]
 
 = 3.4 =
