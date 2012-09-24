@@ -1,7 +1,7 @@
 <?php
 /*
 	Plugin Name: HITS- IE6 PNGFix
-	Version: 3.5.1
+	Version: 3.5.3
 	Author: Adam Erstelle
 	Author URI: http://www.itegritysolutions.ca/
 	Plugin URI: http://www.itegritysolutions.ca/community/wordpress/ie6-png-fix
@@ -32,8 +32,6 @@ if (!class_exists('hits_ie6_pngfix')) {
         * @var string The options string name for this plugin
         */
         var $optionsName = 'hits_ie6_pngfix_options';
-        var $wp_version;
-		var $version = '3.5.1';
 		var $overrideIE6Check=false;//for debug purposes only
         
         /**
