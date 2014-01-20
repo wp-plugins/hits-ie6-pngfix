@@ -51,6 +51,10 @@ Unfortunately there isn't a single best PNG Fix method, otherwise everyone would
 
 == Upgrade Notice ==
 
+= 3.6.0 =
+* Updated to support WordPress 3.8 and new look
+* [Updated January 20, 2014]
+
 = 3.5.3 =
 * Minor performance increase
 
