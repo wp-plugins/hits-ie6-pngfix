@@ -37,7 +37,7 @@ if($_POST['hits_ie6_pngfix_save'])
 			<tr valign="top"> 
 				<th width="33%" scope="row"><?php _e('Where detection should occur:', $this->localizationDomain); ?></th> 
 				<td>
-					<select name="hits_ie6_pngfix_pagesAreCached" id="hits_ie6_pngfix_pagesAreCached" style="width:200px;">
+					<select name="hits_ie6_pngfix_pagesAreCached" id="hits_ie6_pngfix_pagesAreCached" style="width:300px;">
 						<option value="false"<?php if (strcmp($this->options['hits_ie6_pngfix_pagesAreCached'],'false')==0) { echo ' selected="selected"';} ?>><?php _e('Pages are not cached (default)', $this->localizationDomain);?></option>
 						<option value="true"<?php if (strcmp($this->options['hits_ie6_pngfix_pagesAreCached'],'true')==0) { echo ' selected="selected"';} ?>><?php _e('Pages are cached', $this->localizationDomain);?></option>
 					</select>
