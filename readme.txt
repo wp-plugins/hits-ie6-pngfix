@@ -3,9 +3,9 @@ Contributors: wpgwiggum
 Tags: images, plugin, formatting, image, style, compatability, transparency
 Donate Link: http://www.itegritysolutions.ca/community/wordpress/ie6-png-fix
 Requires at least: 2.7
-Tested up to: 3.8
+Tested up to: 4.0.1
 Stable tag: 3.6.0
-Version: 3.6.0
+Version: 3.7.0
 
 Adds IE6 Compatability for PNG transparency, courtesy of multiple choices for PNG fixes available
 
@@ -24,10 +24,6 @@ This section describes how to install the plugin and get it working.
 1. Test and enjoy!
 
 == Frequently Asked Questions ==
-
-= Is this your first plugin? =
-
-Yes, this is my first plugin. If you have any feedback, please visit my site!
 
 = How can I help? =
 
@@ -50,6 +46,10 @@ Unfortunately there isn't a single best PNG Fix method, otherwise everyone would
 2. These are the various options you can select. After clicking save you are done!
 
 == Upgrade Notice ==
+
+= 3.7.0 =
+* Updated to support WordPress 4.0
+* [Updated December 10, 2014]
 
 = 3.6.0 =
 * Updated to support WordPress 3.8 and new look
